@@ -1,0 +1,110 @@
+[运行日志] run_id=20260622_183734
+[运行日志] 日志文件: D:\ProjDemo\BigASelect\output\logs\run_20260622_183734.log
+==================================================
+BigASelect - A股股票筛选程序
+==================================================
+运行模式: 正式模式（全市场）
+行情模式: last_close
+交易日: 20260325
+目标股票池数量: 1000
+筛选规则已启用: True
+
+[1/3] 获取 A 股股票列表...
+      共获取 5528 只股票
+      耗时 0.2s
+[1/3] 轻量指标 enrichment（风险标识 + 流动性字段）...
+      获取最新收盘行情（数据截止 20260325，筛选步骤 1-2）...
+        腾讯批量行情 5528/5528 只
+      耗时 3.0s
+[1/3] 筛选步骤 1-2（风险剔除 + 流动性）...
+      步骤1 风险剔除: 5528 → 5299
+      步骤2 流动性过滤: 5299 → 5299
+      耗时 0.0s
+      步骤 1-2 后剩余 5299 只股票
+      预拉资金流（统一数据源: 同花顺）...
+      资金流预拉耗时 29.0s
+[1/3] 技术 enrichment（日K + 技术指标 + 同花顺资金流）...
+      构建行业映射...
+      计算技术指标与资金流（共 5299 只）...
+        技术 enrichment 进度 264/5299
+        技术 enrichment 进度 528/5299
+        技术 enrichment 进度 792/5299
+        技术 enrichment 进度 1056/5299
+        技术 enrichment 进度 1320/5299
+        技术 enrichment 进度 1584/5299
+        技术 enrichment 进度 1848/5299
+        技术 enrichment 进度 2112/5299
+        技术 enrichment 进度 2376/5299
+        技术 enrichment 进度 2640/5299
+        技术 enrichment 进度 2904/5299
+        技术 enrichment 进度 3168/5299
+        技术 enrichment 进度 3432/5299
+        技术 enrichment 进度 3696/5299
+        技术 enrichment 进度 3960/5299
+        技术 enrichment 进度 4224/5299
+        技术 enrichment 进度 4488/5299
+        技术 enrichment 进度 4752/5299
+        技术 enrichment 进度 5016/5299
+        技术 enrichment 进度 5280/5299
+        技术 enrichment 进度 5299/5299
+      耗时 1092.0s
+[1/3] 筛选步骤 3-4（趋势 + 资金持续性）...
+      步骤3 趋势结构过滤: 5299 → 3222
+      步骤4 资金持续性过滤: 3222 → 1857
+      耗时 0.0s
+      步骤 3-4 后剩余 1857 只股票
+[1/3] 财务 enrichment（估值 + 财务，仅幸存者）...
+      计算估值与财务（共 1857 只）...
+        财务 enrichment 进度 92/1857
+        财务 enrichment 进度 184/1857
+        财务 enrichment 进度 276/1857
+        财务 enrichment 进度 368/1857
+        财务 enrichment 进度 460/1857
+        财务 enrichment 进度 552/1857
+        财务 enrichment 进度 644/1857
+        财务 enrichment 进度 736/1857
+        财务 enrichment 进度 828/1857
+        财务 enrichment 进度 920/1857
+        财务 enrichment 进度 1012/1857
+        财务 enrichment 进度 1104/1857
+        财务 enrichment 进度 1196/1857
+        财务 enrichment 进度 1288/1857
+        财务 enrichment 进度 1380/1857
+        财务 enrichment 进度 1472/1857
+        财务 enrichment 进度 1564/1857
+        财务 enrichment 进度 1656/1857
+        财务 enrichment 进度 1748/1857
+        财务 enrichment 进度 1840/1857
+        财务 enrichment 进度 1857/1857
+      耗时 630.3s
+[1/3] 筛选步骤 5-6（估值财务 + 市场环境）...
+      步骤5 估值财务过滤: 1857 → 1121
+        市场未满足入池条件: market_risk_index=73.00 (须<70), index_ma60_position=-3.4862 (须>=0)
+      步骤6 市场环境过滤: 1121 → 0
+      耗时 0.0s
+      最终股票池 0 只股票
+[3/3] 获取行业强度数据...
+      计算行业指数指标与领涨股20日收益（共 90 个行业，并发 8）...
+        [警告] 领涨股康比特 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股族兴新材 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股联迪信息 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股蘅东光 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股东方碳素 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股艾融软件 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股惠丰钻石 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股海希通讯 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股康比特 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股族兴新材 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股联迪信息 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股蘅东光 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股艾融软件 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股东方碳素 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股海希通讯 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股惠丰钻石 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+      共计算 90 个行业，耗时 34.4s
+
+[2/3] 市场环境指标已输出: D:\ProjDemo\BigASelect\output\market_context_20260325.csv
+
+[3/3] 行业强度已输出: D:\ProjDemo\BigASelect\output\sector_strength_20260325.csv（共 90 个行业）
+
+[1/3] 多因子打分（Value/Growth/Capital/Sector）...

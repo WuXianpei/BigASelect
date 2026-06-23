@@ -1,0 +1,19 @@
+# 历史批跑（筛选 + 打分 → archive）配置
+
+archive:
+  # 归档根目录（相对项目根）
+  root: output/archive
+
+backfill:
+  # 默认向前回溯交易日数量（最少 60，最多 120）
+  default_days: 60
+  max_days: 120
+  min_days: 60
+  # 截止日：null = 最新可用收盘日（已收盘则含当天，与 quote_mode 一致）
+  end_date: null
+  # 已归档则跳过（断点续跑）
+  skip_existing: true
+  # 是否同时写入 output/（便于查看最新一天；批跑建议 true）
+  also_write_output: true
+  # 失败时继续下一日（true=续跑；false=立即停止）
+  continue_on_error: true

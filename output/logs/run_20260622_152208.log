@@ -1,0 +1,151 @@
+[运行日志] run_id=20260622_152208
+[运行日志] 日志文件: D:\ProjDemo\BigASelect\output\logs\run_20260622_152208.log
+==================================================
+BigASelect - A股股票筛选程序
+==================================================
+运行模式: 正式模式（全市场）
+行情模式: last_close
+交易日: 20260622
+目标股票池数量: 1000
+筛选规则已启用: True
+
+[1/3] 获取 A 股股票列表...
+      共获取 5528 只股票
+      耗时 12.8s
+[1/3] 轻量指标 enrichment（风险标识 + 流动性字段）...
+      获取最新收盘行情（数据截止 20260622，筛选步骤 1-2）...
+        腾讯批量行情 5528/5528 只
+      耗时 3.3s
+[1/3] 筛选步骤 1-2（风险剔除 + 流动性）...
+      步骤1 风险剔除: 5528 → 5287
+      步骤2 流动性过滤: 5287 → 4936
+      耗时 0.0s
+      步骤 1-2 后剩余 4936 只股票
+      预拉资金流（统一数据源: 同花顺）...
+      预拉行业资金流（统一数据源: 同花顺）...
+      资金流预拉耗时 79.0s
+[1/3] 技术 enrichment（日K + 技术指标 + 同花顺资金流）...
+      构建行业映射...
+      计算技术指标与资金流（共 4936 只）...
+        技术 enrichment 进度 246/4936
+        技术 enrichment 进度 492/4936
+        技术 enrichment 进度 738/4936
+        技术 enrichment 进度 984/4936
+        技术 enrichment 进度 1230/4936
+        技术 enrichment 进度 1476/4936
+        技术 enrichment 进度 1722/4936
+        技术 enrichment 进度 1968/4936
+        技术 enrichment 进度 2214/4936
+        技术 enrichment 进度 2460/4936
+        技术 enrichment 进度 2706/4936
+        技术 enrichment 进度 2952/4936
+        技术 enrichment 进度 3198/4936
+        技术 enrichment 进度 3444/4936
+        技术 enrichment 进度 3690/4936
+        技术 enrichment 进度 3936/4936
+        技术 enrichment 进度 4182/4936
+        技术 enrichment 进度 4428/4936
+        技术 enrichment 进度 4674/4936
+        技术 enrichment 进度 4920/4936
+        技术 enrichment 进度 4936/4936
+      耗时 1763.6s
+[1/3] 筛选步骤 3-4（趋势 + 资金持续性）...
+      步骤3 趋势结构过滤: 4936 → 1681
+      步骤4 资金持续性过滤: 1681 → 1032
+      耗时 0.0s
+      步骤 3-4 后剩余 1032 只股票
+[1/3] 财务 enrichment（估值 + 财务，仅幸存者）...
+      计算估值与财务（共 1032 只）...
+        财务 enrichment 进度 51/1032
+        财务 enrichment 进度 102/1032
+        财务 enrichment 进度 153/1032
+        财务 enrichment 进度 204/1032
+        财务 enrichment 进度 255/1032
+        财务 enrichment 进度 306/1032
+        财务 enrichment 进度 357/1032
+        财务 enrichment 进度 408/1032
+        财务 enrichment 进度 459/1032
+        财务 enrichment 进度 510/1032
+        财务 enrichment 进度 561/1032
+        财务 enrichment 进度 612/1032
+        财务 enrichment 进度 663/1032
+        财务 enrichment 进度 714/1032
+        财务 enrichment 进度 765/1032
+        财务 enrichment 进度 816/1032
+        财务 enrichment 进度 867/1032
+        财务 enrichment 进度 918/1032
+        财务 enrichment 进度 969/1032
+        财务 enrichment 进度 1020/1032
+        财务 enrichment 进度 1032/1032
+      耗时 475.9s
+[1/3] 筛选步骤 5-6（估值财务 + 市场环境）...
+      步骤5 估值财务过滤: 1032 → 545
+      步骤6 市场环境过滤: 545 → 545
+      耗时 0.0s
+      最终股票池 545 只股票
+[1/3] 附加北向个股 northbound_flow（仅最终股票池）...
+      北向个股 northbound_flow: 成功 349，跳过 196 （非沪股通或暂无数据）
+      耗时 227.8s
+
+[2/3] 市场环境指标已输出: D:\ProjDemo\BigASelect\output\market_context_20260622.csv
+
+[3/3] 获取行业强度数据...
+      计算行业指数指标（共 90 个行业）...
+      计算领涨股20日收益（共 90 个行业）...
+        [警告] 领涨股东方碳素 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股联迪信息 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股族兴新材 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股艾融软件 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股蘅东光 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股康比特 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股东方碳素 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股艾融软件 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股族兴新材 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股康比特 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股联迪信息 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股蘅东光 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股惠丰钻石 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股海希通讯 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股惠丰钻石 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股海希通讯 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+      共计算 90 个行业，耗时 71.6s
+      已输出: D:\ProjDemo\BigASelect\output\sector_strength_20260622.csv
+[1/3] 多因子打分（Value/Growth/Capital/Sector）...
+      市场档位: neutral，总分区间 [3.90, 62.25]，耗时 0.1s
+      总分 Top5:
+        002842.SZ 翔鹭钨业 final=62.25
+        300558.SZ 贝达药业 final=59.09
+        600601.SH 方正科技 final=55.96
+        605020.SH 永和股份 final=54.76
+        688308.SH 欧科亿 final=54.30
+      已输出: D:\ProjDemo\BigASelect\output\stock_pool_20260622.csv
+
+      --- 股票池字段填充报告 ---
+      002842.SZ: 54/58 字段有效  缺失: northbound_flow, future_return_10, future_return_30, future_return_60
+      300558.SZ: 55/58 字段有效  缺失: future_return_10, future_return_30, future_return_60
+      600601.SH: 55/58 字段有效  缺失: future_return_10, future_return_30, future_return_60
+      605020.SH: 55/58 字段有效  缺失: future_return_10, future_return_30, future_return_60
+      688308.SH: 55/58 字段有效  缺失: future_return_10, future_return_30, future_return_60
+      002297.SZ: 54/58 字段有效  缺失: main_net_inflow_10d, future_return_10, future_return_30, future_return_60
+      688536.SH: 55/58 字段有效  缺失: future_return_10, future_return_30, future_return_60
+      300613.SZ: 55/58 字段有效  缺失: future_return_10, future_return_30, future_return_60
+      002975.SZ: 55/58 字段有效  缺失: future_return_10, future_return_30, future_return_60
+      600259.SH: 55/58 字段有效  缺失: future_return_10, future_return_30, future_return_60
+      688378.SH: 55/58 字段有效  缺失: future_return_10, future_return_30, future_return_60
+      603032.SH: 55/58 字段有效  缺失: future_return_10, future_return_30, future_return_60
+      688758.SH: 54/58 字段有效  缺失: northbound_flow, future_return_10, future_return_30, future_return_60
+      301536.SZ: 55/58 字段有效  缺失: future_return_10, future_return_30, future_return_60
+      688059.SH: 55/58 字段有效  缺失: future_return_10, future_return_30, future_return_60
+      920111.BJ: 50/58 字段有效  缺失: main_net_inflow_1d, main_net_inflow_3d, main_net_inflow_5d, main_net_inflow_10d, northbound_flow, future_return_10, future_return_30, future_return_60
+      603045.SH: 54/58 字段有效  缺失: northbound_flow, future_return_10, future_return_30, future_return_60
+      002079.SZ: 55/58 字段有效  缺失: future_return_10, future_return_30, future_return_60
+      300390.SZ: 55/58 字段有效  缺失: future_return_10, future_return_30, future_return_60
+      002192.SZ: 55/58 字段有效  缺失: future_return_10, future_return_30, future_return_60
+      ... 其余 525 只详见日志报告 stock_pool_field_stats
+
+      汇总: 0/545 只股票字段全部有效；缺失最多的字段: future_return_10(545), future_return_30(545), future_return_60(545), northbound_flow(196), main_net_inflow_3d(32)
+
+==================================================
+完成！总耗时 2634.5s，请检查 output/ 目录。
+==================================================
+[运行日志] 报告已保存: D:\ProjDemo\BigASelect\output\logs\run_20260622_152208_report.json

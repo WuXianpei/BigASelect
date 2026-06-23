@@ -1,0 +1,74 @@
+{
+  "run_id": "20260622_180810",
+  "status": "failed",
+  "error": "unsupported format string passed to NoneType.__format__",
+  "started_at": "2026-06-22T18:08:10",
+  "finished_at": "2026-06-22T18:37:34",
+  "total_duration_sec": 1764.44,
+  "test_mode": false,
+  "trade_date": "20260324",
+  "target_pool_size": 1000,
+  "enrich_workers": 20,
+  "log_file": "D:\\ProjDemo\\BigASelect\\output\\logs\\run_20260622_180810.log",
+  "steps": [
+    {
+      "name": "获取股票列表",
+      "duration_sec": 13.05,
+      "stock_count": 5528
+    },
+    {
+      "name": "轻量enrichment",
+      "duration_sec": 2.52,
+      "stock_count": 5528
+    },
+    {
+      "name": "筛选步骤1-2",
+      "duration_sec": 0.01,
+      "input_count": 5528,
+      "output_count": 5299
+    },
+    {
+      "name": "资金流预拉",
+      "duration_sec": 31.55
+    },
+    {
+      "name": "技术enrichment",
+      "duration_sec": 1078.26,
+      "stock_count": 5299
+    },
+    {
+      "name": "筛选步骤3-4",
+      "duration_sec": 0.02,
+      "input_count": 5299,
+      "output_count": 1851
+    },
+    {
+      "name": "财务enrichment",
+      "duration_sec": 604.62,
+      "stock_count": 1851
+    },
+    {
+      "name": "市场环境指标",
+      "duration_sec": 0,
+      "index_count": 5
+    },
+    {
+      "name": "筛选步骤5-6",
+      "duration_sec": 0.0,
+      "input_count": 1851,
+      "output_count": 0
+    },
+    {
+      "name": "行业强度",
+      "duration_sec": 34.36,
+      "industry_count": 90,
+      "sector_filtered": false
+    }
+  ],
+  "mode": "正式模式（全市场）",
+  "target_count": 1000,
+  "screening_enabled": true,
+  "market_context_output": "D:\\ProjDemo\\BigASelect\\output\\market_context_20260324.csv",
+  "sector_strength_output": "D:\\ProjDemo\\BigASelect\\output\\sector_strength_20260324.csv",
+  "error_trace": "Traceback (most recent call last):\n  File \"D:\\ProjDemo\\BigASelect\\main.py\", line 118, in run_for_trade_date\n    outputs = _run_pipeline(\n              ^^^^^^^^^^^^^^\n  File \"D:\\ProjDemo\\BigASelect\\main.py\", line 372, in _run_pipeline\n    f\"总分区间 [{score_summary.get('final_score_min'):.2f}, \"\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: unsupported format string passed to NoneType.__format__\n"
+}

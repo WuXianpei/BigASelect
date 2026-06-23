@@ -1,0 +1,63 @@
+# 行业强度数据文件字段定义
+# 每个行业一行
+
+output:
+  filename: sector_strength.csv
+  encoding: utf-8-sig
+  description: A股各行业板块强度指标
+
+fields:
+  - name: industry
+    description: 行业名称
+    type: string
+    required: true
+
+  - name: sector_money_flow_1d
+    description: 近1日行业主力净流入（亿元）
+    type: number
+    required: false
+
+  - name: sector_money_flow_3d
+    description: 近3日行业主力净流入（亿元）
+    type: number
+    required: false
+
+  - name: sector_money_flow_5d
+    description: 近5日行业主力净流入（亿元）
+    type: number
+    required: false
+
+  - name: sector_money_flow_10d
+    description: 近10日行业主力净流入（亿元）
+    type: number
+    required: false
+
+  - name: sector_momentum_score
+    description: 板块动量评分（0-100）
+    type: number
+    required: false
+
+  - name: sector_strength_rank
+    description: 板块强度排名（1=最强）
+    type: number
+    required: false
+
+  - name: leader_stock_strength
+    description: 领涨股当日涨跌幅（%）
+    type: number
+    required: false
+
+  - name: leader_stock_return_20d
+    description: 领涨股近20日收益率（%）
+    type: number
+    required: false
+
+  - name: sector_high_stock_ratio
+    description: 行业内上涨个股占比（0-1）
+    type: number
+    required: false
+
+  - name: sector_new_high_ratio
+    description: 行业指数相对20日高点位置（0-1，1=创新高）
+    type: number
+    required: false

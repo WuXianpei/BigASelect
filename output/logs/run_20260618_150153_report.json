@@ -1,0 +1,125 @@
+{
+  "run_id": "20260618_150153",
+  "status": "success",
+  "error": null,
+  "started_at": "2026-06-18T15:01:53",
+  "finished_at": "2026-06-18T15:49:02",
+  "total_duration_sec": 2828.83,
+  "test_mode": false,
+  "trade_date": "20260618",
+  "target_pool_size": 1000,
+  "enrich_workers": 24,
+  "log_file": "D:\\ProjDemo\\BigASelect\\output\\logs\\run_20260618_150153.log",
+  "steps": [
+    {
+      "name": "获取股票列表",
+      "duration_sec": 15.03,
+      "stock_count": 5528
+    },
+    {
+      "name": "轻量enrichment",
+      "duration_sec": 3.45,
+      "stock_count": 5528
+    },
+    {
+      "name": "筛选步骤1-2",
+      "duration_sec": 0.01,
+      "input_count": 5528,
+      "output_count": 4663
+    },
+    {
+      "name": "资金流预拉",
+      "duration_sec": 85.7
+    },
+    {
+      "name": "技术enrichment",
+      "duration_sec": 1707.73,
+      "stock_count": 4663
+    },
+    {
+      "name": "筛选步骤3-4",
+      "duration_sec": 0.03,
+      "input_count": 4663,
+      "output_count": 1407
+    },
+    {
+      "name": "财务enrichment",
+      "duration_sec": 647.71,
+      "stock_count": 1407
+    },
+    {
+      "name": "市场环境指标",
+      "duration_sec": 0,
+      "index_count": 5
+    },
+    {
+      "name": "筛选步骤5-6",
+      "duration_sec": 0.01,
+      "input_count": 1407,
+      "output_count": 780
+    },
+    {
+      "name": "北向个股",
+      "duration_sec": 319.42,
+      "stock_count": 780
+    },
+    {
+      "name": "行业强度",
+      "duration_sec": 48.3,
+      "industry_count": 90,
+      "sector_filtered": false
+    }
+  ],
+  "mode": "正式模式（全市场）",
+  "target_count": 1000,
+  "screening_enabled": true,
+  "stock_pool_output": "D:\\ProjDemo\\BigASelect\\output\\stock_pool_20260618_150153.csv",
+  "stock_pool_count": 780,
+  "stock_pool_field_stats": {
+    "total_stocks": 780,
+    "fully_filled_stocks": 435,
+    "missing_by_field": {
+      "close": 1,
+      "pct_chg": 1,
+      "open": 2,
+      "high": 2,
+      "low": 2,
+      "volume": 1,
+      "amount": 1,
+      "turnover_rate": 1,
+      "ma5": 2,
+      "ma10": 4,
+      "ma20": 8,
+      "ma60": 22,
+      "ma120": 34,
+      "ma250": 38,
+      "ma20_slope": 11,
+      "ma60_slope": 24,
+      "high_20d": 8,
+      "low_20d": 8,
+      "high_60d": 22,
+      "low_60d": 22,
+      "close_vs_20d_high": 8,
+      "close_vs_60d_high": 22,
+      "price_percentile_1y": 8,
+      "volatility_20d": 8,
+      "main_net_inflow_1d": 58,
+      "main_net_inflow_3d": 57,
+      "main_net_inflow_5d": 49,
+      "main_net_inflow_10d": 32,
+      "northbound_flow": 287,
+      "rsi_14": 5,
+      "macd_hist": 13,
+      "trend_strength_score": 2,
+      "price_above_ma20_days": 2,
+      "price_above_ma60_days": 2,
+      "roe": 4,
+      "net_profit_yoy": 4,
+      "debt_ratio": 4,
+      "pe_percentile_5y": 5,
+      "pb_percentile_5y": 5
+    }
+  },
+  "market_context_output": "D:\\ProjDemo\\BigASelect\\output\\market_context_20260618_150153.csv",
+  "sector_strength_output": "D:\\ProjDemo\\BigASelect\\output\\sector_strength_20260618_150153.csv"
+}

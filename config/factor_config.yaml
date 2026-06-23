@@ -1,0 +1,167 @@
+# 多因子打分模型配置
+
+normalization:
+  # 除下列字段外，其余输入在股票池内做截面分位归一化（0-100）
+  use_percentile_norm: true
+  missing_fill: 50
+  # 已是 0-100 量纲，不再做分位归一化
+  scale_0_100_fields:
+    - pe_percentile_5y
+    - pb_percentile_5y
+    - trend_strength_score
+    - ma_trend_score
+    - price_structure_score
+    - sector_momentum_score
+    - sector_rank_score
+  # 0-1 比例字段，打分前乘以 100
+  ratio_0_1_fields:
+    - sector_new_high_ratio
+
+# 市场档位与四类因子动态权重（依据 market_risk_index）
+market_regime:
+  default_regime: neutral
+  thresholds:
+    low_max: 40      # risk < 40 → low
+    high_min: 70     # risk > 70 → high
+  weights:
+    low:
+      value: 0.2
+      growth: 0.4
+      capital: 0.25
+      sector: 0.15
+    neutral:
+      value: 0.25
+      growth: 0.35
+      capital: 0.25
+      sector: 0.15
+    high:
+      value: 0.4
+      growth: 0.25
+      capital: 0.2
+      sector: 0.15
+
+# 四类因子：加权求和
+factors:
+  value:
+    output_column: value_score
+    components:
+      - field: pe_percentile_5y
+        weight: -0.35
+      - field: pb_percentile_5y
+        weight: -0.25
+      - field: roe
+        weight: 0.25
+      - field: debt_ratio
+        weight: -0.15
+
+  growth:
+    output_column: growth_score
+    components:
+      - field: net_profit_yoy
+        weight: 0.4
+      - field: trend_strength_score
+        weight: 0.3
+      - field: ma_trend_score
+        weight: 0.2
+      - field: price_structure_score
+        weight: 0.1
+
+  capital:
+    output_column: capital_score
+    components:
+      - field: main_net_inflow_10d
+        weight: 0.35
+      - field: northbound_flow
+        weight: 0.25
+      - field: turnover_rate
+        weight: 0.2
+      - field: sector_money_flow_5d
+        weight: 0.2
+
+  sector:
+    output_column: sector_score
+    components:
+      - field: sector_momentum_score
+        weight: 0.4
+      - field: sector_new_high_ratio
+        weight: 0.3
+      - field: leader_stock_strength
+        weight: 0.2
+      - field: sector_rank_score
+        weight: 0.1
+
+# 由股票池字段推导的辅助评分（0-100）
+derived_scores:
+  ma_trend_score:
+    max_score: 100
+    require_field: close
+    rules:
+      - type: close_above_ma
+        ma_field: ma5
+        points: 10
+      - type: close_above_ma
+        ma_field: ma10
+        points: 10
+      - type: close_above_ma
+        ma_field: ma20
+        points: 15
+      - type: close_above_ma
+        ma_field: ma60
+        points: 15
+      - type: field_positive
+        field: ma20_slope
+        points: 20
+      - type: field_positive
+        field: ma60_slope
+        points: 15
+      - type: capped_field
+        field: price_above_ma20_days
+        cap: 15
+
+  price_structure_score:
+    max_score: 100
+    rules:
+      - type: tier
+        field: close_vs_20d_high
+        tiers:
+          - { min: -2, points: 40 }
+          - { min: -10, points: 25 }
+          - { min: -20, points: 10 }
+      - type: tier
+        field: close_vs_60d_high
+        tiers:
+          - { min: -2, points: 30 }
+          - { min: -10, points: 18 }
+          - { min: -20, points: 8 }
+      - type: tier
+        field: price_percentile_1y
+        tiers:
+          - { min: 80, points: 30 }
+          - { min: 50, points: 15 }
+
+# 行业强度合并字段（按 industry 关联 sector_strength）
+sector_merge:
+  join_key: industry
+  columns:
+    - sector_money_flow_5d
+    - sector_momentum_score
+    - sector_new_high_ratio
+    - leader_stock_strength
+    - sector_strength_rank
+
+# 总分输出
+final_score:
+  output_column: final_score
+  sort_ascending: false
+  weight_output_columns:
+    value: score_weight_value
+    growth: score_weight_growth
+    capital: score_weight_capital
+    sector: score_weight_sector
+  regime_output_column: score_market_regime
+
+# 未来收益率占位列（后续回填）
+future_return_columns:
+  - future_return_10
+  - future_return_30
+  - future_return_60

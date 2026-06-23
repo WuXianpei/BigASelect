@@ -1,0 +1,83 @@
+# A股市场环境数据文件字段定义
+# 多行：settings.yaml 中 market_indices 每个指数一行；全市场宏观字段各行相同
+
+output:
+  filename: market_context.csv
+  encoding: utf-8-sig
+  description: A股市场宏观环境（多指数 + 全市场指标）
+
+fields:
+  - name: index_code
+    description: 指数代码（如 000001）
+    type: string
+    required: true
+
+  - name: index_name
+    description: 指数名称（如 上证指数）
+    type: string
+    required: true
+
+  - name: index_close
+    description: 指数最新收盘点位
+    type: number
+    required: true
+
+  - name: index_change_pct
+    description: 指数涨跌幅（%）
+    type: number
+    required: true
+
+  - name: index_ma20_position
+    description: 指数收盘相对 MA20 偏离（%）
+    type: number
+    required: false
+
+  - name: index_ma60_position
+    description: 指数收盘相对 MA60 偏离（%）
+    type: number
+    required: false
+
+  - name: index_ma120_position
+    description: 指数收盘相对 MA120 偏离（%）
+    type: number
+    required: false
+
+  - name: market_risk_index
+    description: 市场风险指数（0-100，基于上证指数计算，各行相同）
+    type: number
+    required: true
+
+  - name: market_breadth_up
+    description: 全市场上涨家数（各行相同）
+    type: number
+    required: false
+
+  - name: market_breadth_down
+    description: 全市场下跌家数（各行相同）
+    type: number
+    required: false
+
+  - name: market_money_flow
+    description: 近5日全市场主力净流入合计（亿元，各行相同）
+    type: number
+    required: false
+
+  - name: northbound_total_flow
+    description: 北向资金当日净流入（亿元，各行相同）
+    type: number
+    required: false
+
+  - name: vix_proxy
+    description: 50ETF 期权隐含波动率指数 QVIX（各行相同）
+    type: number
+    required: false
+
+  - name: market_volatility_20d
+    description: 该指数 20 日年化波动率（%）
+    type: number
+    required: false
+
+  - name: sector_rotation_state
+    description: 行业轮动状态（普涨/普跌/强轮动/结构性，各行相同）
+    type: string
+    required: false

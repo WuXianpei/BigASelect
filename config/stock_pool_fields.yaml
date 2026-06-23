@@ -1,0 +1,297 @@
+# 股票池输出文件字段定义
+
+output:
+  filename: stock_pool.csv
+  encoding: utf-8-sig
+  description: A股筛选后的股票池
+
+fields:
+  - name: ts_code
+    description: 股票代码（带交易所后缀）
+    type: string
+    required: true
+
+  - name: name
+    description: 股票名称
+    type: string
+    required: true
+
+  - name: industry
+    description: 所属行业
+    type: string
+    required: false
+
+  - name: market
+    description: 市场板块（上交所/深交所/创业板/科创板/北交所）
+    type: string
+    required: false
+
+  - name: close
+    description: 最新收盘价
+    type: number
+    required: true
+
+  - name: pct_chg
+    description: 涨跌幅（%）
+    type: number
+    required: false
+
+  - name: open
+    description: 开盘价
+    type: number
+    required: false
+
+  - name: high
+    description: 最高价
+    type: number
+    required: false
+
+  - name: low
+    description: 最低价
+    type: number
+    required: false
+
+  - name: volume
+    description: 成交量（股）
+    type: number
+    required: false
+
+  - name: amount
+    description: 成交额（元）
+    type: number
+    required: false
+
+  - name: turnover_rate
+    description: 换手率（%）
+    type: number
+    required: false
+
+  - name: ma5
+    description: 5日均线
+    type: number
+    required: false
+
+  - name: ma10
+    description: 10日均线
+    type: number
+    required: false
+
+  - name: ma20
+    description: 20日均线
+    type: number
+    required: false
+
+  - name: ma60
+    description: 60日均线
+    type: number
+    required: false
+
+  - name: ma120
+    description: 120日均线
+    type: number
+    required: false
+
+  - name: ma250
+    description: 250日均线
+    type: number
+    required: false
+
+  - name: ma20_slope
+    description: MA20 斜率（5日变化率，%）
+    type: number
+    required: false
+
+  - name: ma60_slope
+    description: MA60 斜率（5日变化率，%）
+    type: number
+    required: false
+
+  - name: high_20d
+    description: 近20日最高价
+    type: number
+    required: false
+
+  - name: low_20d
+    description: 近20日最低价
+    type: number
+    required: false
+
+  - name: high_60d
+    description: 近60日最高价
+    type: number
+    required: false
+
+  - name: low_60d
+    description: 近60日最低价
+    type: number
+    required: false
+
+  - name: close_vs_20d_high
+    description: 收盘价相对近20日高点偏离（%）
+    type: number
+    required: false
+
+  - name: close_vs_60d_high
+    description: 收盘价相对近60日高点偏离（%）
+    type: number
+    required: false
+
+  - name: price_percentile_1y
+    description: 收盘价在近1年价格区间中的百分位（0-100）
+    type: number
+    required: false
+
+  - name: volatility_20d
+    description: 20日年化波动率（%）
+    type: number
+    required: false
+
+  - name: main_net_inflow_1d
+    description: 近1日主力净流入（元）
+    type: number
+    required: false
+
+  - name: main_net_inflow_3d
+    description: 近3日主力净流入（元）
+    type: number
+    required: false
+
+  - name: main_net_inflow_5d
+    description: 近5日主力净流入（元）
+    type: number
+    required: false
+
+  - name: main_net_inflow_10d
+    description: 近10日主力净流入（元）
+    type: number
+    required: false
+
+  - name: northbound_flow
+    description: 北向资金当日净流入（元，沪深港通标的）
+    type: number
+    required: false
+
+  - name: rsi_14
+    description: 14日 RSI
+    type: number
+    required: false
+
+  - name: macd_hist
+    description: MACD 柱状图
+    type: number
+    required: false
+
+  - name: trend_strength_score
+    description: 趋势强度评分（0-100）
+    type: number
+    required: false
+
+  - name: price_above_ma20_days
+    description: 收盘价连续站上 MA20 的天数
+    type: number
+    required: false
+
+  - name: price_above_ma60_days
+    description: 收盘价连续站上 MA60 的天数
+    type: number
+    required: false
+
+  - name: pe_ttm
+    description: 市盈率 TTM
+    type: number
+    required: false
+
+  - name: pb
+    description: 市净率
+    type: number
+    required: false
+
+  - name: roe
+    description: 净资产收益率（%）
+    type: number
+    required: false
+
+  - name: net_profit_yoy
+    description: 净利润同比增长率（%）
+    type: number
+    required: false
+
+  - name: debt_ratio
+    description: 资产负债率（%）
+    type: number
+    required: false
+
+  - name: pe_percentile_5y
+    description: 当前 PE 在近5年历史中百分位（0-100）
+    type: number
+    required: false
+
+  - name: pb_percentile_5y
+    description: 当前 PB 在近5年历史中百分位（0-100）
+    type: number
+    required: false
+
+  - name: value_score
+    description: 价值因子得分
+    type: number
+    required: false
+
+  - name: growth_score
+    description: 成长趋势因子得分
+    type: number
+    required: false
+
+  - name: capital_score
+    description: 资金因子得分
+    type: number
+    required: false
+
+  - name: sector_score
+    description: 行业因子得分
+    type: number
+    required: false
+
+  - name: final_score
+    description: 综合总分（按 market_risk_index 动态权重加权）
+    type: number
+    required: false
+
+  - name: score_market_regime
+    description: 打分所用市场档位（low/neutral/high）
+    type: string
+    required: false
+
+  - name: score_weight_value
+    description: 价值因子权重
+    type: number
+    required: false
+
+  - name: score_weight_growth
+    description: 成长因子权重
+    type: number
+    required: false
+
+  - name: score_weight_capital
+    description: 资金因子权重
+    type: number
+    required: false
+
+  - name: score_weight_sector
+    description: 行业因子权重
+    type: number
+    required: false
+
+  - name: future_return_10
+    description: 未来10日收益率（%），后续回填
+    type: number
+    required: false
+
+  - name: future_return_30
+    description: 未来30日收益率（%），后续回填
+    type: number
+    required: false
+
+  - name: future_return_60
+    description: 未来60日收益率（%），后续回填
+    type: number
+    required: false

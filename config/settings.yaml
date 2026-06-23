@@ -1,0 +1,91 @@
+# 全局运行配置
+
+# 本程序进程内强制直连（默认 true；数据源均为国内站点，无需代理）
+# 仅对本 Python 进程生效，不修改系统代理及其他程序
+process_direct: true
+
+# 数据提供方：akshare | tushare（tushare 需自行配置 token）
+data_provider: akshare
+
+# 股票池目标数量（筛选后约等于此数量，具体由 screening_rules.yaml 控制）
+target_pool_size: 1000
+
+# 输出目录（相对项目根目录）
+output_dir: output
+
+# 正式每日跑批成功后自动归档到 output/archive/（测试模式不归档）
+auto_archive: true
+
+# 交易日：为空则自动取最近一个交易日
+trade_date: null
+
+# 行情模式：last_close=最新可用收盘日K（推荐）| realtime=盘中实时快照
+# last_close 规则：交易日 15:00 前用上一交易日收盘，15:00 后用当天收盘
+quote_mode: last_close
+
+# A 股收盘时间（北京时间，用于判断当天收盘是否可用）
+market_close_time: "15:00"
+
+# 并发 enrichment（数据丰富）线程数
+# 8 核 16G 建议 20；程序自动上限为 CPU×3（8 核即 24），可设 auto 自动推算
+enrich_workers: 20
+
+# 资金流预拉并发（8 个周期接口，建议 4，避免触发数据源限流）
+prefetch_workers: 4
+
+# 分阶段 enrichment：先全量技术+资金流，筛选 3-4 后再对幸存者拉估值/财务（大幅缩短全市场耗时）
+staggered_enrichment: true
+
+# 腾讯批量行情每批请求数量（8G 以上内存可略增）
+quote_batch_size: 100
+
+# 个股北向资金 northbound_flow：仅筛选后股票池拉取；非沪股通/失败自动跳过
+fetch_northbound_flow: true
+northbound_workers: 12
+
+# 市场环境指数列表（每个指数输出一行）
+market_indices:
+  - code: "000001"
+    symbol: "sh000001"
+    name: "上证指数"
+  - code: "399006"
+    symbol: "sz399006"
+    name: "创业板指"
+  - code: "000688"
+    symbol: "sh000688"
+    name: "科创50"
+  - code: "899050"
+    symbol: "bj899050"
+    name: "北证50"
+  - code: "000300"
+    symbol: "sh000300"
+    name: "沪深300"
+
+# 测试模式：true 时仅处理 test_symbols 中的股票（跳过高全市场扫描）
+# 正式运行请使用: python main.py --production
+test_mode: true
+test_pool_size: 5
+test_symbols:
+  - ts_code: "600519.SH"
+    name: "贵州茅台"      # 上交所
+  - ts_code: "000001.SZ"
+    name: "平安银行"      # 深交所主板
+  - ts_code: "300750.SZ"
+    name: "宁德时代"      # 创业板
+  - ts_code: "688981.SH"
+    name: "中芯国际"      # 科创板
+  - ts_code: "832982.BJ"
+    name: "锦波生物"      # 北交所
+
+# 测试模式下仅计算股票池涉及的行业（大幅缩短行业强度耗时）
+test_skip_full_sector: true
+
+# 行业强度计算并发数（建议与 CPU 核数相当）
+sector_enrich_workers: 8
+
+# 运行日志目录（每次运行生成 run_YYYYMMDD_HHMMSS.log 与 _report.json）
+run_log_dir: output/logs
+
+# tushare 配置（仅 data_provider 为 tushare 时生效）
+tushare:
+  token: ""

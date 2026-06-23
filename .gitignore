@@ -1,0 +1,9 @@
+# Python 缓存（其余 output/ 等运行产物按用户要求一并纳入版本库）
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+
+# 本地密钥（勿提交 token）
+.env
+*.pem
