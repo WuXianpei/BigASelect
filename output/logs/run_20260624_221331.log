@@ -1,0 +1,290 @@
+[运行日志] run_id=20260624_221331
+[运行日志] 日志文件: D:\BigACode\BugASelect\BigASelect\output\logs\run_20260624_221331.log
+==================================================
+BigASelect - A股股票筛选程序
+==================================================
+运行模式: 正式模式（全市场）
+行情模式: last_close
+交易日: 20260618
+目标股票池数量: 1000
+筛选规则已启用: True
+
+[1/3] 获取 A 股股票列表...
+      共获取 5529 只股票
+      耗时 0.3s
+[1/3] 轻量指标 enrichment（风险标识 + 流动性字段）...
+      获取最新收盘行情（数据截止 20260618，筛选步骤 1-2）...
+        腾讯批量行情 5529/5529 只
+      耗时 2.3s
+[1/3] 筛选步骤 1-2（风险剔除 + 流动性）...
+      步骤1 风险剔除: 5529 → 5300
+      步骤2 流动性过滤: 5300 → 5300
+      耗时 0.0s
+      步骤 1-2 后剩余 5300 只股票
+      预拉资金流（统一数据源: 同花顺）...
+        [警告] 同花顺个股即时 获取失败: 'NoneType' object has no attribute 'text'
+        [警告] 同花顺个股3日排行 获取失败: 'NoneType' object has no attribute 'text'
+        [警告] 同花顺个股10日排行 获取失败: 'NoneType' object has no attribute 'text'
+        [警告] 同花顺个股5日排行 获取失败: 'NoneType' object has no attribute 'text'
+        [警告] 同花顺行业即时 获取失败: 'NoneType' object has no attribute 'text'
+        [警告] 同花顺行业3日排行 获取失败: 'NoneType' object has no attribute 'text'
+        [警告] 同花顺行业10日排行 获取失败: 'NoneType' object has no attribute 'text'
+        [警告] 同花顺行业5日排行 获取失败: 'NoneType' object has no attribute 'text'
+      资金流预拉耗时 10.1s
+[1/3] 技术 enrichment（日K + 技术指标 + 同花顺资金流）...
+      构建行业映射...
+      计算技术指标与资金流（共 5300 只）...
+        技术 enrichment 进度 265/5300
+        技术 enrichment 进度 530/5300
+        技术 enrichment 进度 795/5300
+        技术 enrichment 进度 1060/5300
+        技术 enrichment 进度 1325/5300
+        技术 enrichment 进度 1590/5300
+        技术 enrichment 进度 1855/5300
+        技术 enrichment 进度 2120/5300
+        技术 enrichment 进度 2385/5300
+        技术 enrichment 进度 2650/5300
+        技术 enrichment 进度 2915/5300
+        技术 enrichment 进度 3180/5300
+        技术 enrichment 进度 3445/5300
+        技术 enrichment 进度 3710/5300
+        技术 enrichment 进度 3975/5300
+        技术 enrichment 进度 4240/5300
+        技术 enrichment 进度 4505/5300
+        技术 enrichment 进度 4770/5300
+        技术 enrichment 进度 5035/5300
+        技术 enrichment 进度 5300/5300
+      耗时 590.6s
+[1/3] 筛选步骤 3-4（趋势 + 资金持续性）...
+      步骤3 趋势结构过滤: 5300 → 1714
+      步骤4 资金持续性过滤: 已禁用，保留 1714 只
+      耗时 0.0s
+      步骤 3-4 后剩余 1714 只股票
+[1/3] 财务 enrichment（估值 + 财务，仅幸存者）...
+      计算估值与财务（共 1714 只）...
+        财务 enrichment 进度 85/1714
+        财务 enrichment 进度 170/1714
+        财务 enrichment 进度 255/1714
+        财务 enrichment 进度 340/1714
+        财务 enrichment 进度 425/1714
+        财务 enrichment 进度 510/1714
+        财务 enrichment 进度 595/1714
+        财务 enrichment 进度 680/1714
+        财务 enrichment 进度 765/1714
+        财务 enrichment 进度 850/1714
+        财务 enrichment 进度 935/1714
+        财务 enrichment 进度 1020/1714
+        财务 enrichment 进度 1105/1714
+        财务 enrichment 进度 1190/1714
+        财务 enrichment 进度 1275/1714
+        财务 enrichment 进度 1360/1714
+        财务 enrichment 进度 1445/1714
+        财务 enrichment 进度 1530/1714
+        财务 enrichment 进度 1615/1714
+        财务 enrichment 进度 1700/1714
+        财务 enrichment 进度 1714/1714
+      耗时 162.9s
+[1/3] 筛选步骤 5（估值财务）...
+      步骤5 估值财务过滤: 1714 → 1035
+      步骤6 市场环境: 不参与筛选（流程末尾输出告警）
+      耗时 0.0s
+      最终股票池 1000 只股票
+[1/3] 附加北向个股 northbound_flow（与行业强度并行）...
+      计算行业指数指标与领涨股20日收益（共 90 个行业，并发 8）...
+        [警告] 领涨股一博科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股六九一二 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股凯莱英 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股臻宝科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股领益智造 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股中复神鹰 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股永杉锂业 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股飞凯材料 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股臻宝科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股一博科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股六九一二 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股领益智造 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股凯莱英 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股飞凯材料 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股中复神鹰 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股永杉锂业 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股云南锗业 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股英唐智控 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股驰宏锌锗 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股戈碧迦 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股华夏航空 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股兴发集团 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))        [警告] 领涨股株冶集团 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+        [警告] 领涨股高特电子 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股云南锗业 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股英唐智控 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股兴发集团 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股华夏航空 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股株冶集团 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股戈碧迦 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股驰宏锌锗 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股高特电子 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股瑞松科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股中一科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股冰川网络 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股迈信林 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股通鼎互联 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股雅化集团 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股中远海能 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股吉宏股份 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股瑞松科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股冰川网络 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))        [警告] 领涨股中一科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+        [警告] 领涨股迈信林 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股雅化集团 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股通鼎互联 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股中远海能 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股吉宏股份 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+      北向个股 northbound_flow: 成功 672，跳过 328 （非沪股通或暂无数据）
+        [警告] 领涨股彤程新材 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股平治信息 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股平安电工 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股精测电子 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股三孚股份 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股泽璟制药 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股华信新材 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股百普赛斯 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股彤程新材 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股平治信息 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股平安电工 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股精测电子 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股三孚股份 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股华信新材 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股泽璟制药 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股百普赛斯 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股金刚光伏 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股国际复材 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股协创数据 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股盛剑科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股绿通科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股信测标准 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股海达尔 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股精智达 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股金刚光伏 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股国际复材 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股盛剑科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股协创数据 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股信测标准 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股绿通科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股精智达 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股海达尔 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股大中矿业 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股鑫宏业 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股名家汇 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股福达合金 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股*ST帅电 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股新华保险 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股康平科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股拱东医疗 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股大中矿业 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股鑫宏业 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股名家汇 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股福达合金 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股新华保险 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股*ST帅电 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股康平科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股拱东医疗 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股宏景科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股金富科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股宇新股份 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股东阳光 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股龙磁科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股禾望电气 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股探路者 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股高斯贝尔 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股宏景科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股金富科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股宇新股份 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股东阳光 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股探路者 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股禾望电气 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股高斯贝尔 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股龙磁科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股华安证券 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股济川药业 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股密尔克卫 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股长龄液压 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股兴业科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股亨通股份 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股天味食品 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股德尔未来 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股济川药业 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股华安证券 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股密尔克卫 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股长龄液压 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股兴业科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股德尔未来 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股亨通股份 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股天味食品 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股漱玉平民 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股朗坤科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股倍益康 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股依依股份 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股山东高速 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股索辰科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股天娱数科 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股宇通客车 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股漱玉平民 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股朗坤科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股倍益康 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股依依股份 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股山东高速 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股索辰科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股宇通客车 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股天娱数科 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股民士达 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股众合科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股宁波银行 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股新潮能源 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股合百集团 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股回盛生物 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股今世缘 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股养元饮品 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股民士达 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股众合科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股宁波银行 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股新潮能源 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股回盛生物 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股合百集团 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股今世缘 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股养元饮品 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股万通发展 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股四川双马 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股冠农股份 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股ST金鸿 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股科德教育 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股东方创业 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股润农节水 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股电投能源 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股四川双马 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股万通发展 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股冠农股份 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股ST金鸿 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股科德教育 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股东方创业 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股电投能源 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股润农节水 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股儒意电影 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股丽江股份 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股儒意电影 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股丽江股份 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+      北向+行业并行耗时 284.0s
+
+[2/3] 市场环境指标已输出: D:\BigACode\BugASelect\BigASelect\output\market_context_20260618.csv
+
+[3/3] 行业强度已输出: D:\BigACode\BugASelect\BigASelect\output\sector_strength_20260618.csv（共 90 个行业）
+
+[1/3] 多因子打分（Value/Growth/Capital/Sector）...
+      市场档位: neutral，总分区间 [8.72, 52.81]，耗时 0.2s
+      已输出: D:\BigACode\BugASelect\BigASelect\output\stock_pool_20260618.csv
+      股票池 1000 只（批跑精简日志）
+
+
+      [市场环境] 市场环境正常：market_risk_index=50.00，index_ma60_position=0.9128
+==================================================
+完成！总耗时 1050.5s，请检查 output/ 目录。
+==================================================

@@ -1,0 +1,131 @@
+{
+  "run_id": "20260623_191710",
+  "status": "success",
+  "error": null,
+  "started_at": "2026-06-23T19:17:10",
+  "finished_at": "2026-06-23T19:42:49",
+  "total_duration_sec": 1538.98,
+  "test_mode": false,
+  "trade_date": "20260409",
+  "target_pool_size": 1000,
+  "enrich_workers": 20,
+  "log_file": "D:\\BigACode\\BugASelect\\BigASelect\\output\\logs\\run_20260623_191710.log",
+  "steps": [
+    {
+      "name": "获取股票列表",
+      "duration_sec": 9.33,
+      "stock_count": 5528
+    },
+    {
+      "name": "轻量enrichment",
+      "duration_sec": 2.76,
+      "stock_count": 5528
+    },
+    {
+      "name": "筛选步骤1-2",
+      "duration_sec": 0.01,
+      "input_count": 5528,
+      "output_count": 5299
+    },
+    {
+      "name": "资金流预拉",
+      "duration_sec": 23.78
+    },
+    {
+      "name": "技术enrichment",
+      "duration_sec": 586.03,
+      "stock_count": 5299
+    },
+    {
+      "name": "筛选步骤3-4",
+      "duration_sec": 0.01,
+      "input_count": 5299,
+      "output_count": 3163
+    },
+    {
+      "name": "财务enrichment",
+      "duration_sec": 814.95,
+      "stock_count": 3163
+    },
+    {
+      "name": "市场环境指标",
+      "duration_sec": 0,
+      "index_count": 5
+    },
+    {
+      "name": "筛选步骤5",
+      "duration_sec": 0.01,
+      "input_count": 3163,
+      "output_count": 1000
+    },
+    {
+      "name": "北向与行业并行",
+      "duration_sec": 101.33,
+      "stock_count": 1000,
+      "industry_count": 90
+    },
+    {
+      "name": "多因子打分",
+      "duration_sec": 0.22,
+      "count": 1000,
+      "market_regime": "neutral",
+      "final_score_min": 2.1717,
+      "final_score_max": 58.0942,
+      "final_score_mean": 30.0079
+    }
+  ],
+  "mode": "正式模式（全市场）",
+  "target_count": 1000,
+  "screening_enabled": true,
+  "market_context_output": "D:\\BigACode\\BugASelect\\BigASelect\\output\\market_context_20260409.csv",
+  "sector_strength_output": "D:\\BigACode\\BugASelect\\BigASelect\\output\\sector_strength_20260409.csv",
+  "stock_pool_output": "D:\\BigACode\\BugASelect\\BigASelect\\output\\stock_pool_20260409.csv",
+  "stock_pool_count": 1000,
+  "stock_pool_field_stats": {
+    "total_stocks": 1000,
+    "fully_filled_stocks": 0,
+    "missing_by_field": {}
+  },
+  "stock_pool_score_summary": {
+    "count": 1000,
+    "market_regime": "neutral",
+    "final_score_min": 2.1717,
+    "final_score_max": 58.0942,
+    "final_score_mean": 30.0079,
+    "top5": [
+      {
+        "ts_code": "688536.SH",
+        "name": "思瑞浦",
+        "final_score": 58.0942
+      },
+      {
+        "ts_code": "002437.SZ",
+        "name": "誉衡药业",
+        "final_score": 56.7696
+      },
+      {
+        "ts_code": "688308.SH",
+        "name": "欧科亿",
+        "final_score": 55.9507
+      },
+      {
+        "ts_code": "688400.SH",
+        "name": "凌云光",
+        "final_score": 54.6743
+      },
+      {
+        "ts_code": "002259.SZ",
+        "name": "升达林业",
+        "final_score": 53.5026
+      }
+    ]
+  },
+  "market_environment_alert": {
+    "alert": true,
+    "market_risk_index": 65.0,
+    "index_ma60_position": -2.4476,
+    "market_risk_index_max": 70,
+    "index_ma60_position_min": 0,
+    "message": "当前大盘环境偏离建议区间：index_ma60_position=-2.4476（建议>=0）"
+  }
+}

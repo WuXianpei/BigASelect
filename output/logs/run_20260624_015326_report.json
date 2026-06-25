@@ -1,0 +1,131 @@
+{
+  "run_id": "20260624_015326",
+  "status": "success",
+  "error": null,
+  "started_at": "2026-06-24T01:53:26",
+  "finished_at": "2026-06-24T02:07:40",
+  "total_duration_sec": 854.72,
+  "test_mode": false,
+  "trade_date": "20260506",
+  "target_pool_size": 1000,
+  "enrich_workers": 20,
+  "log_file": "D:\\BigACode\\BugASelect\\BigASelect\\output\\logs\\run_20260624_015326.log",
+  "steps": [
+    {
+      "name": "获取股票列表",
+      "duration_sec": 0.26,
+      "stock_count": 5528
+    },
+    {
+      "name": "轻量enrichment",
+      "duration_sec": 1.94,
+      "stock_count": 5528
+    },
+    {
+      "name": "筛选步骤1-2",
+      "duration_sec": 0.01,
+      "input_count": 5528,
+      "output_count": 5299
+    },
+    {
+      "name": "资金流预拉",
+      "duration_sec": 9.64
+    },
+    {
+      "name": "技术enrichment",
+      "duration_sec": 560.21,
+      "stock_count": 5299
+    },
+    {
+      "name": "筛选步骤3-4",
+      "duration_sec": 0.01,
+      "input_count": 5299,
+      "output_count": 2702
+    },
+    {
+      "name": "财务enrichment",
+      "duration_sec": 192.7,
+      "stock_count": 2702
+    },
+    {
+      "name": "市场环境指标",
+      "duration_sec": 0,
+      "index_count": 5
+    },
+    {
+      "name": "筛选步骤5",
+      "duration_sec": 0.01,
+      "input_count": 2702,
+      "output_count": 1000
+    },
+    {
+      "name": "北向与行业并行",
+      "duration_sec": 88.4,
+      "stock_count": 1000,
+      "industry_count": 0
+    },
+    {
+      "name": "多因子打分",
+      "duration_sec": 0.13,
+      "count": 1000,
+      "market_regime": "neutral",
+      "final_score_min": 14.8489,
+      "final_score_max": 48.4888,
+      "final_score_mean": 33.5387
+    }
+  ],
+  "mode": "正式模式（全市场）",
+  "target_count": 1000,
+  "screening_enabled": true,
+  "market_context_output": "D:\\BigACode\\BugASelect\\BigASelect\\output\\market_context_20260506.csv",
+  "sector_strength_output": "D:\\BigACode\\BugASelect\\BigASelect\\output\\sector_strength_20260506.csv",
+  "stock_pool_output": "D:\\BigACode\\BugASelect\\BigASelect\\output\\stock_pool_20260506.csv",
+  "stock_pool_count": 1000,
+  "stock_pool_field_stats": {
+    "total_stocks": 1000,
+    "fully_filled_stocks": 0,
+    "missing_by_field": {}
+  },
+  "stock_pool_score_summary": {
+    "count": 1000,
+    "market_regime": "neutral",
+    "final_score_min": 14.8489,
+    "final_score_max": 48.4888,
+    "final_score_mean": 33.5387,
+    "top5": [
+      {
+        "ts_code": "600573.SH",
+        "name": "惠泉啤酒",
+        "final_score": 48.4888
+      },
+      {
+        "ts_code": "301479.SZ",
+        "name": "弘景光电",
+        "final_score": 48.3844
+      },
+      {
+        "ts_code": "301408.SZ",
+        "name": "华人健康",
+        "final_score": 47.5502
+      },
+      {
+        "ts_code": "600338.SH",
+        "name": "西藏珠峰",
+        "final_score": 47.3992
+      },
+      {
+        "ts_code": "300657.SZ",
+        "name": "弘信电子",
+        "final_score": 46.9204
+      }
+    ]
+  },
+  "market_environment_alert": {
+    "alert": false,
+    "market_risk_index": 50.0,
+    "index_ma60_position": 2.6751,
+    "market_risk_index_max": 70,
+    "index_ma60_position_min": 0,
+    "message": "市场环境正常：market_risk_index=50.00，index_ma60_position=2.6751"
+  }
+}

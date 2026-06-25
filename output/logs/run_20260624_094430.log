@@ -1,0 +1,196 @@
+[运行日志] run_id=20260624_094430
+[运行日志] 日志文件: D:\BigACode\BugASelect\BigASelect\output\logs\run_20260624_094430.log
+==================================================
+BigASelect - A股股票筛选程序
+==================================================
+运行模式: 正式模式（全市场）
+行情模式: last_close
+交易日: 20260526
+目标股票池数量: 1000
+筛选规则已启用: True
+
+[1/3] 获取 A 股股票列表...
+      共获取 5529 只股票
+      耗时 0.3s
+[1/3] 轻量指标 enrichment（风险标识 + 流动性字段）...
+      获取最新收盘行情（数据截止 20260526，筛选步骤 1-2）...
+        腾讯批量行情 5529/5529 只
+      耗时 2.2s
+[1/3] 筛选步骤 1-2（风险剔除 + 流动性）...
+      步骤1 风险剔除: 5529 → 5300
+      步骤2 流动性过滤: 5300 → 5300
+      耗时 0.0s
+      步骤 1-2 后剩余 5300 只股票
+      预拉资金流（统一数据源: 同花顺）...
+        [警告] 同花顺个股5日排行 获取失败: 'NoneType' object has no attribute 'text'
+        [警告] 同花顺个股即时 获取失败: 'NoneType' object has no attribute 'text'
+        [警告] 同花顺个股10日排行 获取失败: 'NoneType' object has no attribute 'text'
+        [警告] 同花顺个股3日排行 获取失败: 'NoneType' object has no attribute 'text'
+        [警告] 同花顺行业3日排行 获取失败: No tables found
+        [警告] 同花顺行业5日排行 获取失败: No tables found
+      资金流预拉耗时 10.2s
+[1/3] 技术 enrichment（日K + 技术指标 + 同花顺资金流）...
+      构建行业映射...
+      计算技术指标与资金流（共 5300 只）...
+        技术 enrichment 进度 265/5300
+        技术 enrichment 进度 530/5300
+        技术 enrichment 进度 795/5300
+        技术 enrichment 进度 1060/5300
+        技术 enrichment 进度 1325/5300
+        技术 enrichment 进度 1590/5300
+        技术 enrichment 进度 1855/5300
+        技术 enrichment 进度 2120/5300
+        技术 enrichment 进度 2385/5300
+        技术 enrichment 进度 2650/5300
+        技术 enrichment 进度 2915/5300
+        技术 enrichment 进度 3180/5300
+        技术 enrichment 进度 3445/5300
+        技术 enrichment 进度 3710/5300
+        技术 enrichment 进度 3975/5300
+        技术 enrichment 进度 4240/5300
+        技术 enrichment 进度 4505/5300
+        技术 enrichment 进度 4770/5300
+        技术 enrichment 进度 5035/5300
+        技术 enrichment 进度 5300/5300
+      耗时 564.0s
+[1/3] 筛选步骤 3-4（趋势 + 资金持续性）...
+      步骤3 趋势结构过滤: 5300 → 2380
+      步骤4 资金持续性过滤: 已禁用，保留 2380 只
+      耗时 0.0s
+      步骤 3-4 后剩余 2380 只股票
+[1/3] 财务 enrichment（估值 + 财务，仅幸存者）...
+      计算估值与财务（共 2380 只）...
+        财务 enrichment 进度 119/2380
+        财务 enrichment 进度 238/2380
+        财务 enrichment 进度 357/2380
+        财务 enrichment 进度 476/2380
+        财务 enrichment 进度 595/2380
+        财务 enrichment 进度 714/2380
+        财务 enrichment 进度 833/2380
+        财务 enrichment 进度 952/2380
+        财务 enrichment 进度 1071/2380
+        财务 enrichment 进度 1190/2380
+        财务 enrichment 进度 1309/2380
+        财务 enrichment 进度 1428/2380
+        财务 enrichment 进度 1547/2380
+        财务 enrichment 进度 1666/2380
+        财务 enrichment 进度 1785/2380
+        财务 enrichment 进度 1904/2380
+        财务 enrichment 进度 2023/2380
+        财务 enrichment 进度 2142/2380
+        财务 enrichment 进度 2261/2380
+        财务 enrichment 进度 2380/2380
+      耗时 201.7s
+[1/3] 筛选步骤 5（估值财务）...
+      步骤5 估值财务过滤: 2380 → 1530
+      步骤6 市场环境: 不参与筛选（流程末尾输出告警）
+      耗时 0.0s
+      最终股票池 1000 只股票
+[1/3] 附加北向个股 northbound_flow（与行业强度并行）...
+      计算行业指数指标与领涨股20日收益（共 90 个行业，并发 8）...
+        [警告] 领涨股冰川网络 获取失败: index 0 is out of bounds for axis 0 with size 0        [警告] 领涨股华夏航空 获取失败: index 0 is out of bounds for axis 0 with size 0
+
+        [警告] 领涨股招商轮船 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股招商轮船 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股冰川网络 获取失败: index 0 is out of bounds for axis 0 with size 0        [警告] 领涨股华夏航空 获取失败: index 0 is out of bounds for axis 0 with size 0
+
+        [警告] 领涨股济川药业 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股华安证券 获取失败: index 0 is out of bounds for axis 0 with size 0        [警告] 领涨股济川药业 获取失败: index 0 is out of bounds for axis 0 with size 0
+
+        [警告] 领涨股华安证券 获取失败: index 0 is out of bounds for axis 0 with size 0        [警告] 领涨股绿通科技 获取失败: index 0 is out of bounds for axis 0 with size 0
+
+        [警告] 领涨股绿通科技 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股天味食品 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股天味食品 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股西陇科学 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股航天电器 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股西陇科学 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股航天电器 获取失败: index 0 is out of bounds for axis 0 with size 0        [警告] 领涨股今世缘 获取失败: index 0 is out of bounds for axis 0 with size 0
+
+        [警告] 领涨股科威尔 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股今世缘 获取失败: index 0 is out of bounds for axis 0 with size 0        [警告] 领涨股科威尔 获取失败: index 0 is out of bounds for axis 0 with size 0
+
+        [警告] 领涨股赛英电子 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股赛英电子 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股博迁新材 获取失败: 未找到领涨股 博迁新材
+        [警告] 领涨股中国太保 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股中国太保 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股皖通高速 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股博迁新材 获取失败: 未找到领涨股 博迁新材
+        [警告] 领涨股彤程新材 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股千里科技 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股皖通高速 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股彤程新材 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股千里科技 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股伊利股份 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股臻宝科技 获取失败: 未找到领涨股 臻宝科技
+        [警告] 领涨股伊利股份 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股信测标准 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股迈信林 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股信测标准 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股泽璟制药 获取失败: 未找到领涨股 泽璟制药
+        [警告] 领涨股华联股份 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股迈信林 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股华联股份 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股荣盛石化 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股株冶集团 获取失败: 未找到领涨股 株冶集团
+        [警告] 领涨股鸣志电器 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股天娱数科 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股荣盛石化 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股鸣志电器 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股天娱数科 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股臻宝科技 获取失败: 未找到领涨股 臻宝科技
+        [警告] 领涨股新潮能源 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股瑞华泰 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股新潮能源 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股瑞华泰 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股鼎汉技术 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股鼎汉技术 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股泽璟制药 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股株冶集团 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股*ST宇顺 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股宇晶股份 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股云铝股份 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股东箭科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股正和生态 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股长高电气 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股立霸股份 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股迦南科技 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股*ST宇顺 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股东方创业 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股东方创业 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股立霸股份 获取失败: 未找到领涨股 立霸股份
+        [警告] 领涨股云铝股份 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股龙源技术 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股锦江酒店 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股龙源技术 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股德龙汇能 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股锦江酒店 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股平安电工 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股德龙汇能 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股宏景科技 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股平安电工 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股诺普信 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股宏景科技 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股晋控煤业 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股诺普信 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股长裕集团 获取失败: 未找到领涨股 长裕集团
+        [警告] 领涨股晋控煤业 获取失败: index 0 is out of bounds for axis 0 with size 0
+        [警告] 领涨股长裕集团 获取失败: 未找到领涨股 长裕集团
+      北向个股 northbound_flow: 成功 752，跳过 248 （非沪股通或暂无数据）
+      北向+行业并行耗时 84.6s
+
+[2/3] 市场环境指标已输出: D:\BigACode\BugASelect\BigASelect\output\market_context_20260526.csv
+
+[3/3] 行业强度已输出: D:\BigACode\BugASelect\BigASelect\output\sector_strength_20260526.csv（共 90 个行业）
+
+[1/3] 多因子打分（Value/Growth/Capital/Sector）...
+      市场档位: neutral，总分区间 [8.64, 49.25]，耗时 0.1s
+      已输出: D:\BigACode\BugASelect\BigASelect\output\stock_pool_20260526.csv
+      股票池 1000 只（批跑精简日志）
+
+
+      [市场环境] 市场环境正常：market_risk_index=50.00，index_ma60_position=1.9578
+==================================================
+完成！总耗时 863.3s，请检查 output/ 目录。
+==================================================

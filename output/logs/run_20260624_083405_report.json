@@ -1,0 +1,131 @@
+{
+  "run_id": "20260624_083405",
+  "status": "success",
+  "error": null,
+  "started_at": "2026-06-24T08:34:05",
+  "finished_at": "2026-06-24T08:48:18",
+  "total_duration_sec": 852.88,
+  "test_mode": false,
+  "trade_date": "20260519",
+  "target_pool_size": 1000,
+  "enrich_workers": 20,
+  "log_file": "D:\\BigACode\\BugASelect\\BigASelect\\output\\logs\\run_20260624_083405.log",
+  "steps": [
+    {
+      "name": "获取股票列表",
+      "duration_sec": 0.27,
+      "stock_count": 5529
+    },
+    {
+      "name": "轻量enrichment",
+      "duration_sec": 2.29,
+      "stock_count": 5529
+    },
+    {
+      "name": "筛选步骤1-2",
+      "duration_sec": 0.01,
+      "input_count": 5529,
+      "output_count": 5300
+    },
+    {
+      "name": "资金流预拉",
+      "duration_sec": 10.45
+    },
+    {
+      "name": "技术enrichment",
+      "duration_sec": 562.41,
+      "stock_count": 5300
+    },
+    {
+      "name": "筛选步骤3-4",
+      "duration_sec": 0.01,
+      "input_count": 5300,
+      "output_count": 2557
+    },
+    {
+      "name": "财务enrichment",
+      "duration_sec": 191.04,
+      "stock_count": 2557
+    },
+    {
+      "name": "市场环境指标",
+      "duration_sec": 0,
+      "index_count": 5
+    },
+    {
+      "name": "筛选步骤5",
+      "duration_sec": 0.01,
+      "input_count": 2557,
+      "output_count": 1000
+    },
+    {
+      "name": "北向与行业并行",
+      "duration_sec": 84.62,
+      "stock_count": 1000,
+      "industry_count": 0
+    },
+    {
+      "name": "多因子打分",
+      "duration_sec": 0.15,
+      "count": 1000,
+      "market_regime": "neutral",
+      "final_score_min": 13.0511,
+      "final_score_max": 48.88,
+      "final_score_mean": 31.8592
+    }
+  ],
+  "mode": "正式模式（全市场）",
+  "target_count": 1000,
+  "screening_enabled": true,
+  "market_context_output": "D:\\BigACode\\BugASelect\\BigASelect\\output\\market_context_20260519.csv",
+  "sector_strength_output": "D:\\BigACode\\BugASelect\\BigASelect\\output\\sector_strength_20260519.csv",
+  "stock_pool_output": "D:\\BigACode\\BugASelect\\BigASelect\\output\\stock_pool_20260519.csv",
+  "stock_pool_count": 1000,
+  "stock_pool_field_stats": {
+    "total_stocks": 1000,
+    "fully_filled_stocks": 0,
+    "missing_by_field": {}
+  },
+  "stock_pool_score_summary": {
+    "count": 1000,
+    "market_regime": "neutral",
+    "final_score_min": 13.0511,
+    "final_score_max": 48.88,
+    "final_score_mean": 31.8592,
+    "top5": [
+      {
+        "ts_code": "301609.SZ",
+        "name": "山大电力",
+        "final_score": 48.88
+      },
+      {
+        "ts_code": "300827.SZ",
+        "name": "上能电气",
+        "final_score": 48.0402
+      },
+      {
+        "ts_code": "688712.SH",
+        "name": "北芯生命",
+        "final_score": 47.7515
+      },
+      {
+        "ts_code": "301589.SZ",
+        "name": "诺瓦星云",
+        "final_score": 47.3214
+      },
+      {
+        "ts_code": "605011.SH",
+        "name": "杭州热电",
+        "final_score": 47.159
+      }
+    ]
+  },
+  "market_environment_alert": {
+    "alert": false,
+    "market_risk_index": 40.0,
+    "index_ma60_position": 2.5679,
+    "market_risk_index_max": 70,
+    "index_ma60_position_min": 0,
+    "message": "市场环境正常：market_risk_index=40.00，index_ma60_position=2.5679"
+  }
+}

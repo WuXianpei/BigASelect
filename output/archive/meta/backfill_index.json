@@ -10,14 +10,68 @@
     "20260402",
     "20260403",
     "20260407",
-    "20260408"
+    "20260408",
+    "20260409",
+    "20260410",
+    "20260413",
+    "20260414",
+    "20260415",
+    "20260416",
+    "20260417",
+    "20260420",
+    "20260421",
+    "20260422",
+    "20260423",
+    "20260424",
+    "20260427",
+    "20260428",
+    "20260429",
+    "20260430",
+    "20260506",
+    "20260507",
+    "20260508",
+    "20260511",
+    "20260512",
+    "20260513",
+    "20260514",
+    "20260515",
+    "20260518",
+    "20260519",
+    "20260520",
+    "20260521",
+    "20260522",
+    "20260525",
+    "20260526",
+    "20260527",
+    "20260528",
+    "20260529",
+    "20260601",
+    "20260602",
+    "20260603",
+    "20260604",
+    "20260605",
+    "20260608",
+    "20260609",
+    "20260610",
+    "20260611",
+    "20260612",
+    "20260615",
+    "20260616",
+    "20260617",
+    "20260618",
+    "20260622",
+    "20260623",
+    "20260624"
   ],
   "failed": {},
   "run_plan": {
-    "end_date": "20260622",
+    "end_date": "20260624",
     "day_count": 60,
     "pending": [
-      "20260325",
+      "20260623",
+      "20260624"
+    ],
+    "skipped": [
       "20260326",
       "20260327",
       "20260330",
@@ -76,12 +130,9 @@
       "20260617",
       "20260618",
       "20260622"
-    ],
-    "skipped": [
-      "20260324"
     ]
   },
-  "updated_at": "2026-06-23T17:05:48+08:00",
+  "updated_at": "2026-06-24T23:23:42+08:00",
   "details": {
     "20260324": {
       "status": "completed",
@@ -137,6 +188,261 @@
       "status": "completed",
       "stock_count": 1000,
       "duration_sec": 2356.4
+    },
+    "20260409": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1539.0
+    },
+    "20260410": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1350.75
+    },
+    "20260413": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1540.66
+    },
+    "20260414": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1331.55
+    },
+    "20260415": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1242.08
+    },
+    "20260416": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 960.06
+    },
+    "20260417": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1459.22
+    },
+    "20260420": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 885.08
+    },
+    "20260421": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1212.48
+    },
+    "20260422": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 915.44
+    },
+    "20260423": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 919.08
+    },
+    "20260424": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 914.34
+    },
+    "20260427": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 899.3
+    },
+    "20260428": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1234.81
+    },
+    "20260429": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1056.08
+    },
+    "20260430": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 860.87
+    },
+    "20260506": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 854.73
+    },
+    "20260507": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 853.17
+    },
+    "20260508": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 882.32
+    },
+    "20260511": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 892.9
+    },
+    "20260512": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1288.08
+    },
+    "20260513": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1211.81
+    },
+    "20260514": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 861.92
+    },
+    "20260515": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 848.48
+    },
+    "20260518": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1050.95
+    },
+    "20260519": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 852.89
+    },
+    "20260520": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 848.48
+    },
+    "20260521": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 843.18
+    },
+    "20260522": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 837.28
+    },
+    "20260525": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 842.96
+    },
+    "20260526": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 864.36
+    },
+    "20260527": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 866.74
+    },
+    "20260528": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 865.26
+    },
+    "20260529": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 884.55
+    },
+    "20260601": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 895.73
+    },
+    "20260602": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 902.79
+    },
+    "20260603": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 897.74
+    },
+    "20260604": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 901.03
+    },
+    "20260605": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 877.52
+    },
+    "20260608": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 850.67
+    },
+    "20260609": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 840.93
+    },
+    "20260610": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 845.64
+    },
+    "20260611": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 814.13
+    },
+    "20260612": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 810.32
+    },
+    "20260615": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 806.36
+    },
+    "20260616": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 813.09
+    },
+    "20260617": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 849.14
+    },
+    "20260618": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1051.67
+    },
+    "20260622": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 857.85
+    },
+    "20260623": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 903.93
+    },
+    "20260624": {
+      "status": "completed",
+      "stock_count": 988,
+      "duration_sec": 777.63
     }
   }
 }
