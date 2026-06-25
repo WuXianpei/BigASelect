@@ -37,6 +37,11 @@ def load_factor_config() -> dict[str, Any]:
     return load_yaml("factor_config.yaml")
 
 
+def load_factor_analysis_config() -> dict[str, Any]:
+    """加载因子有效性分析配置"""
+    return load_yaml("factor_analysis.yaml")
+
+
 def load_field_schema(filename: str) -> dict[str, Any]:
     """加载输出字段定义"""
     return load_yaml(filename)

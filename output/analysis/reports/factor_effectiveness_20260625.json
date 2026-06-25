@@ -1,0 +1,271 @@
+{
+  "generated_at": "2026-06-25T21:00:04+08:00",
+  "factor_config": "config/factor_config.yaml",
+  "return_column": "future_return_20",
+  "return_storage": "output/archive/stock_pool/",
+  "window": {
+    "analysis_dates": [
+      "20260324",
+      "20260325",
+      "20260326",
+      "20260327",
+      "20260330",
+      "20260331",
+      "20260401",
+      "20260402",
+      "20260403",
+      "20260407",
+      "20260408",
+      "20260409",
+      "20260410",
+      "20260413",
+      "20260414",
+      "20260415",
+      "20260416",
+      "20260417",
+      "20260420",
+      "20260421",
+      "20260422",
+      "20260423",
+      "20260424",
+      "20260427",
+      "20260428",
+      "20260429",
+      "20260430",
+      "20260506",
+      "20260507",
+      "20260508",
+      "20260511",
+      "20260512",
+      "20260513",
+      "20260514",
+      "20260515",
+      "20260518",
+      "20260519",
+      "20260520",
+      "20260521",
+      "20260522",
+      "20260525",
+      "20260526",
+      "20260527"
+    ],
+    "return_ready_dates": [
+      "20260324",
+      "20260325",
+      "20260326",
+      "20260327",
+      "20260330",
+      "20260331",
+      "20260401",
+      "20260402",
+      "20260403",
+      "20260407",
+      "20260408",
+      "20260409",
+      "20260410",
+      "20260413",
+      "20260414",
+      "20260415",
+      "20260416",
+      "20260417",
+      "20260420",
+      "20260421",
+      "20260422",
+      "20260423",
+      "20260424",
+      "20260427",
+      "20260428",
+      "20260429",
+      "20260430",
+      "20260506",
+      "20260507",
+      "20260508",
+      "20260511",
+      "20260512",
+      "20260513",
+      "20260514",
+      "20260515",
+      "20260518",
+      "20260519",
+      "20260520",
+      "20260521",
+      "20260522",
+      "20260525",
+      "20260526",
+      "20260527"
+    ],
+    "return_end": "20260527",
+    "sample_sufficient": true,
+    "requested_min": 40,
+    "requested_max": 100,
+    "return_horizon": 20,
+    "latest_trading": "20260625",
+    "primary_score": "final_score"
+  },
+  "return_valid_count": 41980,
+  "panel_rows": 41980,
+  "primary_score": "final_score",
+  "ic_summaries": {
+    "final_score": {
+      "ic_mean": 0.1918,
+      "ic_std": 0.0679,
+      "ic_ir": 2.826,
+      "ic_positive_ratio": 1.0,
+      "ic_days": 42
+    },
+    "value_score": {
+      "ic_mean": -0.2789,
+      "ic_std": 0.1256,
+      "ic_ir": -2.2198,
+      "ic_positive_ratio": 0.0,
+      "ic_days": 42
+    },
+    "growth_score": {
+      "ic_mean": 0.0893,
+      "ic_std": 0.0712,
+      "ic_ir": 1.2542,
+      "ic_positive_ratio": 0.8571,
+      "ic_days": 42
+    },
+    "capital_score": {
+      "ic_mean": 0.3243,
+      "ic_std": 0.0904,
+      "ic_ir": 3.5886,
+      "ic_positive_ratio": 1.0,
+      "ic_days": 42
+    },
+    "sector_score": {
+      "ic_mean": 0.0835,
+      "ic_std": 0.0948,
+      "ic_ir": 0.8809,
+      "ic_positive_ratio": 0.75,
+      "ic_days": 20
+    }
+  },
+  "quintile": {
+    "final_score": {
+      "quintile_means": {
+        "1": 0.7815,
+        "2": -0.2776,
+        "3": -0.6947,
+        "4": -0.0529,
+        "5": 7.075
+      },
+      "quintile_spread": 6.2935,
+      "monotonic": false,
+      "top20_excess": 5.7087
+    },
+    "value_score": {
+      "quintile_means": {
+        "1": 11.5138,
+        "2": 3.9225,
+        "3": -1.3181,
+        "4": -5.2507,
+        "5": -2.0362
+      },
+      "quintile_spread": -13.55,
+      "monotonic": false,
+      "top20_excess": -3.4045
+    },
+    "growth_score": {
+      "quintile_means": {
+        "1": 1.0784,
+        "2": 0.627,
+        "3": 1.9369,
+        "4": 0.4099,
+        "5": 2.7791
+      },
+      "quintile_spread": 1.7007,
+      "monotonic": false,
+      "top20_excess": 1.3691
+    },
+    "capital_score": {
+      "quintile_means": {
+        "1": -5.2406,
+        "2": -4.4099,
+        "3": -0.8597,
+        "4": 5.4841,
+        "5": 11.8574
+      },
+      "quintile_spread": 17.098,
+      "monotonic": true,
+      "top20_excess": 10.4875
+    },
+    "sector_score": {
+      "quintile_means": {
+        "1": 4.0419,
+        "2": 5.1911,
+        "3": -2.5762,
+        "4": -6.1094,
+        "5": 6.2838
+      },
+      "quintile_spread": 2.2419,
+      "monotonic": false,
+      "top20_excess": -0.3233
+    }
+  },
+  "component_ic": {
+    "ma_trend_score": 0.0717,
+    "turnover_rate": 0.3279,
+    "trend_strength_score": 0.0527,
+    "price_structure_score": 0.0611,
+    "pb_percentile_5y": 0.4424,
+    "debt_ratio": -0.0525,
+    "main_net_inflow_10d": -0.0229,
+    "sector_money_flow_5d": 0.1849,
+    "net_profit_yoy": 0.1292,
+    "sector_new_high_ratio": 0.1518,
+    "leader_stock_strength": 0.0614,
+    "sector_rank_score": 0.0959,
+    "roe": 0.093,
+    "sector_momentum_score": 0.0959,
+    "pe_percentile_5y": 0.3349,
+    "northbound_flow": 0.0196
+  },
+  "verdict": {
+    "status": "effective",
+    "status_label": "有效",
+    "effective": true,
+    "rules": [
+      {
+        "name": "ic_mean",
+        "passed": true,
+        "detail": "IC均值=0.1918（阈值>=0.02）"
+      },
+      {
+        "name": "ic_ir",
+        "passed": true,
+        "detail": "IC_IR=2.826（阈值>=0.3）"
+      },
+      {
+        "name": "ic_positive_ratio",
+        "passed": true,
+        "detail": "IC胜率=1.0（阈值>=0.55）"
+      },
+      {
+        "name": "quintile_spread",
+        "passed": true,
+        "detail": "五分位价差=6.2935%（阈值>=1.5%）"
+      },
+      {
+        "name": "monotonic",
+        "passed": false,
+        "detail": "五分位单调递增=False"
+      }
+    ],
+    "passed_count": 4,
+    "pass_min_rules": 4
+  },
+  "top3_stats": {
+    "top_k": 3,
+    "pick_count": 126,
+    "win_count": 85,
+    "win_rate": 0.6746,
+    "avg_return_pct": 12.5154,
+    "max_loss_pct": -25.9944,
+    "avg_day_worst_return_pct": -1.9059,
+    "signal_days": 42,
+    "daily_all_win_rate": 0.4048,
+    "note": "每日 final_score 前 3 只，future_return_20>0 视为赢；不参与失效判定"
+  }
+}

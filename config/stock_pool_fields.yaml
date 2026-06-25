@@ -286,6 +286,11 @@ fields:
     type: number
     required: false
 
+  - name: future_return_20
+    description: 未来20日收益率（%），因子分析时回填至 archive
+    type: number
+    required: false
+
   - name: future_return_30
     description: 未来30日收益率（%），后续回填
     type: number

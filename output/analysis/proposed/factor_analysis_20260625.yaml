@@ -1,0 +1,88 @@
+# 因子有效性分析配置（独立模块，不影响每日筛选）
+
+
+
+version: "1.0.0"
+
+
+
+# 分析窗口：从最新可算 future_return_20 的交易日向前取（archive 缺日自动跳过）
+
+window:
+
+  min_trading_days: 40
+
+  max_trading_days: 100
+
+  return_horizon: 20          # 未来 N 个交易日收益率
+
+
+
+# future_return_20：写入 archive/stock_pool/*.csv（因子分析时增量回填）
+
+future_return:
+
+  column: future_return_20
+
+  fetch_missing_exit_close: true   # exit 收盘价：archive 优先，缺失时 akshare 补拉
+
+  fetch_workers: 8
+
+
+
+# 失效判定阈值（样本 >= min_trading_days 时生效）
+
+verdict:
+
+  ic_mean_min: 0.02
+
+  ic_ir_min: 0.3
+
+  ic_positive_ratio_min: 0.55
+
+  quintile_spread_min: 1.5
+
+  require_monotonic: true
+
+  pass_min_rules: 4
+
+  total_rules: 5
+
+
+
+score_columns:
+
+  primary: final_score
+
+  factor_scores:
+
+    - value_score
+
+    - growth_score
+
+    - capital_score
+
+    - sector_score
+
+
+
+output:
+
+  reports_dir: analysis/reports
+
+  proposed_dir: analysis/proposed
+
+  report_prefix: factor_effectiveness
+
+
+
+proposed_config:
+
+  enabled: true
+
+  source_note: "由因子有效性分析自动生成，请人工审阅后替换 config/factor_config.yaml"
+
+  ic_boost_factor: 5.0
+
+  min_component_weight: 0.05
+
