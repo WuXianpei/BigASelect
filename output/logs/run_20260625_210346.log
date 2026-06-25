@@ -55,3 +55,85 @@ BigASelect - A股股票筛选程序
       步骤 3-4 后剩余 1630 只股票
 [1/3] 财务 enrichment（估值 + 财务，仅幸存者）...
       计算估值与财务（共 1630 只）...
+        财务 enrichment 进度 81/1630
+        财务 enrichment 进度 162/1630
+        财务 enrichment 进度 243/1630
+        财务 enrichment 进度 324/1630
+        财务 enrichment 进度 405/1630
+        财务 enrichment 进度 486/1630
+        财务 enrichment 进度 567/1630
+        财务 enrichment 进度 648/1630
+        财务 enrichment 进度 729/1630
+        财务 enrichment 进度 810/1630
+        财务 enrichment 进度 891/1630
+        财务 enrichment 进度 972/1630
+        财务 enrichment 进度 1053/1630
+        财务 enrichment 进度 1134/1630
+        财务 enrichment 进度 1215/1630
+        财务 enrichment 进度 1296/1630
+        财务 enrichment 进度 1377/1630
+        财务 enrichment 进度 1458/1630
+        财务 enrichment 进度 1539/1630
+        财务 enrichment 进度 1620/1630
+        财务 enrichment 进度 1630/1630
+      耗时 589.1s
+[1/3] 筛选步骤 5（估值财务）...
+      步骤5 估值财务过滤: 1630 → 920
+      步骤6 市场环境: 不参与筛选（流程末尾输出告警）
+      耗时 0.0s
+      最终股票池 920 只股票
+[1/3] 附加北向个股 northbound_flow（与行业强度并行）...
+      计算行业指数指标与领涨股20日收益（共 90 个行业，并发 8）...
+        [警告] 领涨股利尔达 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股民士达 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股民士达 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+        [警告] 领涨股利尔达 获取失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+      北向个股 northbound_flow: 成功 604，跳过 316 （非沪股通或暂无数据）
+      北向+行业并行耗时 251.6s
+
+[2/3] 市场环境指标已输出: D:\ProjDemo\BigASelect\output\market_context_20260625.csv
+
+[3/3] 行业强度已输出: D:\ProjDemo\BigASelect\output\sector_strength_20260625.csv（共 90 个行业）
+
+[1/3] 多因子打分（Value/Growth/Capital/Sector）...
+      市场档位: neutral，总分区间 [-1.16, 75.55]，耗时 0.1s
+      总分 Top5:
+        300613.SZ 富瀚微 final=75.55
+        300223.SZ 北京君正 final=73.38
+        300042.SZ 朗科科技 final=73.20
+        002975.SZ 博杰股份 final=70.75
+        002297.SZ 博云新材 final=70.17
+      已输出: D:\ProjDemo\BigASelect\output\stock_pool_20260625.csv
+
+      --- 股票池字段填充报告 ---
+      300613.SZ: 55/59 字段有效  缺失: future_return_10, future_return_20, future_return_30, future_return_60
+      300223.SZ: 55/59 字段有效  缺失: future_return_10, future_return_20, future_return_30, future_return_60
+      300042.SZ: 55/59 字段有效  缺失: future_return_10, future_return_20, future_return_30, future_return_60
+      002975.SZ: 55/59 字段有效  缺失: future_return_10, future_return_20, future_return_30, future_return_60
+      002297.SZ: 55/59 字段有效  缺失: future_return_10, future_return_20, future_return_30, future_return_60
+      002192.SZ: 55/59 字段有效  缺失: future_return_10, future_return_20, future_return_30, future_return_60
+      300975.SZ: 55/59 字段有效  缺失: future_return_10, future_return_20, future_return_30, future_return_60
+      688378.SH: 55/59 字段有效  缺失: future_return_10, future_return_20, future_return_30, future_return_60
+      688209.SH: 55/59 字段有效  缺失: future_return_10, future_return_20, future_return_30, future_return_60
+      688536.SH: 55/59 字段有效  缺失: future_return_10, future_return_20, future_return_30, future_return_60
+      002747.SZ: 55/59 字段有效  缺失: future_return_10, future_return_20, future_return_30, future_return_60
+      300861.SZ: 55/59 字段有效  缺失: future_return_10, future_return_20, future_return_30, future_return_60
+      300373.SZ: 55/59 字段有效  缺失: future_return_10, future_return_20, future_return_30, future_return_60
+      688401.SH: 55/59 字段有效  缺失: future_return_10, future_return_20, future_return_30, future_return_60
+      301297.SZ: 55/59 字段有效  缺失: future_return_10, future_return_20, future_return_30, future_return_60
+      002407.SZ: 55/59 字段有效  缺失: future_return_10, future_return_20, future_return_30, future_return_60
+      688308.SH: 55/59 字段有效  缺失: future_return_10, future_return_20, future_return_30, future_return_60
+      002156.SZ: 55/59 字段有效  缺失: future_return_10, future_return_20, future_return_30, future_return_60
+      001266.SZ: 54/59 字段有效  缺失: northbound_flow, future_return_10, future_return_20, future_return_30, future_return_60
+      002077.SZ: 55/59 字段有效  缺失: future_return_10, future_return_20, future_return_30, future_return_60
+      ... 其余 900 只详见日志报告 stock_pool_field_stats
+
+      汇总: 0/920 只股票字段全部有效；缺失最多的字段: future_return_10(920), future_return_20(920), future_return_30(920), future_return_60(920), northbound_flow(316)
+
+
+      [市场环境] 市场环境正常：market_risk_index=58.00，index_ma60_position=1.2380
+==================================================
+完成！总耗时 1928.7s，请检查 output/ 目录。
+==================================================
+[归档] 20260625 → D:\ProjDemo\BigASelect\output\archive，stock_pool_20260625.csv，920 只
+[运行日志] 报告已保存: D:\ProjDemo\BigASelect\output\logs\run_20260625_210346_report.json

@@ -9,7 +9,12 @@ import pandas as pd
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.config_loader import get_field_names, load_field_schema, load_settings  # noqa: E402
+from src.config_loader import (  # noqa: E402
+    get_field_names,
+    get_validation_field_names,
+    load_field_schema,
+    load_settings,
+)
 from src.network_setup import setup_network  # noqa: E402
 
 
@@ -61,7 +66,12 @@ def main() -> None:
     all_stats = []
     for filename, schema in schemas.items():
         path = output_dir / filename
-        fields = get_field_names(schema)
+        all_fields = get_field_names(schema)
+        fields = (
+            get_validation_field_names(schema)
+            if filename == "stock_pool.csv"
+            else all_fields
+        )
         if not path.exists():
             print(f"\n[{filename}] 文件不存在: {path}")
             continue

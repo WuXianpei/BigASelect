@@ -77,3 +77,12 @@ def get_required_fields(schema: dict[str, Any]) -> list[str]:
         for field in schema.get("fields", [])
         if field.get("required", False)
     ]
+
+
+def get_validation_field_names(schema: dict[str, Any]) -> list[str]:
+    """筛选/批跑时参与填充校验的字段（排除 backfill 回填列）"""
+    return [
+        field["name"]
+        for field in schema.get("fields", [])
+        if not field.get("backfill", False)
+    ]

@@ -16,7 +16,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.config_loader import (  # noqa: E402
-    get_field_names,
+    get_validation_field_names,
     get_output_path,
     load_field_schema,
     load_screening_rules,
@@ -450,8 +450,8 @@ def _run_pipeline(
 
 
 def _print_field_report(df: pd.DataFrame, schema: dict) -> dict:
-    """打印字段填充情况，并返回汇总统计"""
-    fields = get_field_names(schema)
+    """打印字段填充情况，并返回汇总统计（不含 backfill 回填列）"""
+    fields = get_validation_field_names(schema)
     print("\n      --- 股票池字段填充报告 ---")
 
     missing_by_field: dict[str, int] = {f: 0 for f in fields}
