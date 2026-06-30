@@ -44,6 +44,8 @@ def build_report_payload(
 
     top3_stats: dict[str, Any] | None = None,
 
+    top1_stats: dict[str, Any] | None = None,
+
 ) -> dict[str, Any]:
 
     """组装报告 JSON 结构"""
@@ -75,6 +77,8 @@ def build_report_payload(
         "verdict": verdict,
 
         "top3_stats": top3_stats or {},
+
+        "top1_stats": top1_stats or {},
 
     }
 
@@ -186,15 +190,11 @@ def render_markdown_report(payload: dict[str, Any]) -> str:
 
 
 
+    top1 = payload.get("top1_stats") or {}
+
     top3 = payload.get("top3_stats") or {}
 
-    if top3.get("pick_count", 0) > 0:
-
-        tk = top3.get("top_k", 3)
-
-        wr = top3.get("win_rate") or 0
-
-        dwr = top3.get("daily_all_win_rate") or 0
+    if top1.get("pick_count", 0) > 0 or top3.get("pick_count", 0) > 0:
 
         lines.extend(
 
@@ -206,7 +206,7 @@ def render_markdown_report(payload: dict[str, Any]) -> str:
 
                 "",
 
-                f"模拟每日 `{primary}` **前 {tk} 只**，"
+                f"模拟每日 `{primary}` **第 1 名**与**前 3 只**，"
 
                 f"以 `{return_col} > 0` 视为单笔获胜（到期盈利；"
 
@@ -214,24 +214,56 @@ def render_markdown_report(payload: dict[str, Any]) -> str:
 
                 "",
 
-                f"- Top{tk} 单笔胜率: **{wr * 100:.2f}%**"
-
-                f"（{top3.get('win_count')}/{top3.get('pick_count')} 笔）",
-
-                f"- Top{tk} 平均 {return_col}: {top3.get('avg_return_pct')}%",
-
-                f"- Top{tk} 二十日最大跌幅: **{top3.get('max_loss_pct')}%**"
-                f"（全部 {top3.get('pick_count')} 笔中单笔最差）",
-
-                f"- Top{tk} 每日最差一只平均 {return_col}: {top3.get('avg_day_worst_return_pct')}%",
-
-                f"- 信号日数: {top3.get('signal_days')} 日",
-
-                f"- 当日 Top{tk} 全部为正的比例: {dwr * 100:.2f}%",
-
             ]
 
         )
+
+        if top1.get("pick_count", 0) > 0:
+
+            wr1 = top1.get("win_rate") or 0
+
+            lines.append(
+
+                f"- Top1 单笔胜率: **{wr1 * 100:.2f}%**"
+
+                f"（{top1.get('win_count')}/{top1.get('pick_count')} 笔）"
+
+            )
+
+        if top3.get("pick_count", 0) > 0:
+
+            tk = top3.get("top_k", 3)
+
+            wr = top3.get("win_rate") or 0
+
+            dwr = top3.get("daily_all_win_rate") or 0
+
+            if top1.get("pick_count", 0) > 0:
+
+                lines.append("")
+
+            lines.extend(
+
+                [
+
+                    f"- Top{tk} 单笔胜率: **{wr * 100:.2f}%**"
+
+                    f"（{top3.get('win_count')}/{top3.get('pick_count')} 笔）",
+
+                    f"- Top{tk} 平均 {return_col}: {top3.get('avg_return_pct')}%",
+
+                    f"- Top{tk} 二十日最大跌幅: **{top3.get('max_loss_pct')}%**"
+                    f"（全部 {top3.get('pick_count')} 笔中单笔最差）",
+
+                    f"- Top{tk} 每日最差一只平均 {return_col}: {top3.get('avg_day_worst_return_pct')}%",
+
+                    f"- 信号日数: {top3.get('signal_days')} 日",
+
+                    f"- 当日 Top{tk} 全部为正的比例: {dwr * 100:.2f}%",
+
+                ]
+
+            )
 
 
 

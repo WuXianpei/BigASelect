@@ -322,6 +322,9 @@ def run_analysis(args: argparse.Namespace) -> int:
 
     ref_cfg = analysis_cfg.get("strategy_reference", {})
     top_k = int(ref_cfg.get("top_k", 3))
+    top1_stats = compute_top3_return_stats(
+        panel, primary_score, return_col=return_col, top_k=1
+    )
     top3_stats = compute_top3_return_stats(
         panel, primary_score, return_col=return_col, top_k=top_k
     )
@@ -363,6 +366,8 @@ def run_analysis(args: argparse.Namespace) -> int:
         panel_rows=len(panel),
 
         top3_stats=top3_stats,
+
+        top1_stats=top1_stats,
 
     )
 
@@ -422,6 +427,11 @@ def run_analysis(args: argparse.Namespace) -> int:
 
     )
 
+    if top1_stats.get("win_rate") is not None:
+        print(
+            f"Top1 二十日收益胜率={top1_stats['win_rate'] * 100:.2f}%"
+            f"（{top1_stats['win_count']}/{top1_stats['pick_count']} 笔，仅供参考）"
+        )
     if top3_stats.get("win_rate") is not None:
 
         print(
