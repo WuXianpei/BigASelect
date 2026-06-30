@@ -1,0 +1,131 @@
+{
+  "run_id": "20260626_095149",
+  "status": "success",
+  "error": null,
+  "started_at": "2026-06-26T09:51:49",
+  "finished_at": "2026-06-26T10:06:46",
+  "total_duration_sec": 896.7,
+  "test_mode": false,
+  "trade_date": "20260127",
+  "target_pool_size": 1000,
+  "enrich_workers": 20,
+  "log_file": "D:\\BigACode\\BugASelect\\BigASelect\\output\\logs\\run_20260626_095149.log",
+  "steps": [
+    {
+      "name": "获取股票列表",
+      "duration_sec": 0.26,
+      "stock_count": 5529
+    },
+    {
+      "name": "轻量enrichment",
+      "duration_sec": 2.21,
+      "stock_count": 5529
+    },
+    {
+      "name": "筛选步骤1-2",
+      "duration_sec": 0.01,
+      "input_count": 5529,
+      "output_count": 5300
+    },
+    {
+      "name": "资金流预拉",
+      "duration_sec": 11.11
+    },
+    {
+      "name": "技术enrichment",
+      "duration_sec": 570.52,
+      "stock_count": 5300
+    },
+    {
+      "name": "筛选步骤3-4",
+      "duration_sec": 0.01,
+      "input_count": 5300,
+      "output_count": 2704
+    },
+    {
+      "name": "财务enrichment",
+      "duration_sec": 205.85,
+      "stock_count": 2704
+    },
+    {
+      "name": "市场环境指标",
+      "duration_sec": 0,
+      "index_count": 5
+    },
+    {
+      "name": "筛选步骤5",
+      "duration_sec": 0.01,
+      "input_count": 2704,
+      "output_count": 1000
+    },
+    {
+      "name": "北向与行业并行",
+      "duration_sec": 105.04,
+      "stock_count": 1000,
+      "industry_count": 90
+    },
+    {
+      "name": "多因子打分",
+      "duration_sec": 0.15,
+      "count": 1000,
+      "market_regime": "neutral",
+      "final_score_min": 24.0278,
+      "final_score_max": 59.3068,
+      "final_score_mean": 43.8421
+    }
+  ],
+  "mode": "正式模式（全市场）",
+  "target_count": 1000,
+  "screening_enabled": true,
+  "market_context_output": "D:\\BigACode\\BugASelect\\BigASelect\\output\\market_context_20260127.csv",
+  "sector_strength_output": "D:\\BigACode\\BugASelect\\BigASelect\\output\\sector_strength_20260127.csv",
+  "stock_pool_output": "D:\\BigACode\\BugASelect\\BigASelect\\output\\stock_pool_20260127.csv",
+  "stock_pool_count": 1000,
+  "stock_pool_field_stats": {
+    "total_stocks": 1000,
+    "fully_filled_stocks": 0,
+    "missing_by_field": {}
+  },
+  "stock_pool_score_summary": {
+    "count": 1000,
+    "market_regime": "neutral",
+    "final_score_min": 24.0278,
+    "final_score_max": 59.3068,
+    "final_score_mean": 43.8421,
+    "top5": [
+      {
+        "ts_code": "002602.SZ",
+        "name": "世纪华通",
+        "final_score": 59.3068
+      },
+      {
+        "ts_code": "688372.SH",
+        "name": "伟测科技",
+        "final_score": 59.2073
+      },
+      {
+        "ts_code": "300697.SZ",
+        "name": "电工合金",
+        "final_score": 58.3733
+      },
+      {
+        "ts_code": "002137.SZ",
+        "name": "实益达",
+        "final_score": 56.4216
+      },
+      {
+        "ts_code": "300303.SZ",
+        "name": "聚飞光电",
+        "final_score": 55.5217
+      }
+    ]
+  },
+  "market_environment_alert": {
+    "alert": false,
+    "market_risk_index": 40.0,
+    "index_ma60_position": 4.0505,
+    "market_risk_index_max": 70,
+    "index_ma60_position_min": 0,
+    "message": "市场环境正常：market_risk_index=40.00，index_ma60_position=4.0505"
+  }
+}

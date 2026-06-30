@@ -6,7 +6,7 @@ archive:
 
 backfill:
   # 默认向前回溯交易日数量（最少 60，最多 120）
-  default_days: 60
+  default_days: 120
   max_days: 120
   min_days: 60
   # 截止日：null = 最新可用收盘日（已收盘则含当天，与 quote_mode 一致）

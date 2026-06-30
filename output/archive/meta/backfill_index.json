@@ -1,5 +1,50 @@
 {
   "completed": [
+    "20251223",
+    "20251224",
+    "20251225",
+    "20251226",
+    "20251229",
+    "20251230",
+    "20251231",
+    "20260105",
+    "20260106",
+    "20260107",
+    "20260108",
+    "20260109",
+    "20260112",
+    "20260113",
+    "20260114",
+    "20260115",
+    "20260116",
+    "20260119",
+    "20260120",
+    "20260121",
+    "20260122",
+    "20260123",
+    "20260126",
+    "20260127",
+    "20260128",
+    "20260129",
+    "20260130",
+    "20260202",
+    "20260203",
+    "20260204",
+    "20260205",
+    "20260206",
+    "20260209",
+    "20260210",
+    "20260211",
+    "20260212",
+    "20260213",
+    "20260224",
+    "20260225",
+    "20260226",
+    "20260227",
+    "20260302",
+    "20260303",
+    "20260304",
+    "20260305",
     "20260324",
     "20260325",
     "20260326",
@@ -62,17 +107,74 @@
     "20260622",
     "20260623",
     "20260624",
-    "20260625"
+    "20260625",
+    "20260629"
   ],
   "failed": {},
   "run_plan": {
-    "end_date": "20260624",
-    "day_count": 60,
+    "end_date": "20260630",
+    "day_count": 120,
     "pending": [
-      "20260623",
-      "20260624"
+      "20260306",
+      "20260309",
+      "20260310",
+      "20260311",
+      "20260312",
+      "20260313",
+      "20260316",
+      "20260317",
+      "20260318",
+      "20260319",
+      "20260320",
+      "20260323",
+      "20260626",
+      "20260630"
     ],
     "skipped": [
+      "20251226",
+      "20251229",
+      "20251230",
+      "20251231",
+      "20260105",
+      "20260106",
+      "20260107",
+      "20260108",
+      "20260109",
+      "20260112",
+      "20260113",
+      "20260114",
+      "20260115",
+      "20260116",
+      "20260119",
+      "20260120",
+      "20260121",
+      "20260122",
+      "20260123",
+      "20260126",
+      "20260127",
+      "20260128",
+      "20260129",
+      "20260130",
+      "20260202",
+      "20260203",
+      "20260204",
+      "20260205",
+      "20260206",
+      "20260209",
+      "20260210",
+      "20260211",
+      "20260212",
+      "20260213",
+      "20260224",
+      "20260225",
+      "20260226",
+      "20260227",
+      "20260302",
+      "20260303",
+      "20260304",
+      "20260305",
+      "20260324",
+      "20260325",
       "20260326",
       "20260327",
       "20260330",
@@ -130,10 +232,14 @@
       "20260616",
       "20260617",
       "20260618",
-      "20260622"
+      "20260622",
+      "20260623",
+      "20260624",
+      "20260625",
+      "20260629"
     ]
   },
-  "updated_at": "2026-06-25T21:35:54+08:00",
+  "updated_at": "2026-06-30T21:29:49+08:00",
   "details": {
     "20260324": {
       "status": "completed",
@@ -449,6 +555,236 @@
       "status": "completed",
       "stock_count": 920,
       "duration_sec": 1928.67
+    },
+    "20251223": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1465.93
+    },
+    "20251224": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 870.39
+    },
+    "20251225": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 864.08
+    },
+    "20251226": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 868.62
+    },
+    "20251229": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 868.42
+    },
+    "20251230": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 866.36
+    },
+    "20251231": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 858.82
+    },
+    "20260105": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 857.63
+    },
+    "20260106": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 858.45
+    },
+    "20260107": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 860.5
+    },
+    "20260108": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1075.13
+    },
+    "20260109": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 862.9
+    },
+    "20260112": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 858.8
+    },
+    "20260113": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 17375.08
+    },
+    "20260114": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1086.08
+    },
+    "20260115": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1057.02
+    },
+    "20260116": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 869.51
+    },
+    "20260119": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 869.48
+    },
+    "20260120": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1056.21
+    },
+    "20260121": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 873.52
+    },
+    "20260122": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 874.21
+    },
+    "20260123": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 899.51
+    },
+    "20260126": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 901.67
+    },
+    "20260127": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 896.71
+    },
+    "20260128": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 895.54
+    },
+    "20260129": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 898.69
+    },
+    "20260130": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1379.63
+    },
+    "20260202": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1329.69
+    },
+    "20260203": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1286.39
+    },
+    "20260629": {
+      "status": "completed",
+      "stock_count": 909,
+      "duration_sec": 1145.02
+    },
+    "20260204": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1284.9
+    },
+    "20260205": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1153.65
+    },
+    "20260206": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1285.94
+    },
+    "20260209": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 954.79
+    },
+    "20260210": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1096.31
+    },
+    "20260211": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1049.8
+    },
+    "20260212": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 954.08
+    },
+    "20260213": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 996.87
+    },
+    "20260224": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 916.85
+    },
+    "20260225": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 941.4
+    },
+    "20260226": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1262.56
+    },
+    "20260227": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 924.46
+    },
+    "20260302": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 913.07
+    },
+    "20260303": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 928.4
+    },
+    "20260304": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 36682.77
+    },
+    "20260305": {
+      "status": "completed",
+      "stock_count": 1000,
+      "duration_sec": 1386.56
     }
   }
 }

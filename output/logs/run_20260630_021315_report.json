@@ -1,0 +1,131 @@
+{
+  "run_id": "20260630_021315",
+  "status": "success",
+  "error": null,
+  "started_at": "2026-06-30T02:13:15",
+  "finished_at": "2026-06-30T02:29:51",
+  "total_duration_sec": 996.86,
+  "test_mode": false,
+  "trade_date": "20260213",
+  "target_pool_size": 1000,
+  "enrich_workers": 20,
+  "log_file": "D:\\BigACode\\BugASelect\\BigASelect\\output\\logs\\run_20260630_021315.log",
+  "steps": [
+    {
+      "name": "获取股票列表",
+      "duration_sec": 0.26,
+      "stock_count": 5527
+    },
+    {
+      "name": "轻量enrichment",
+      "duration_sec": 2.09,
+      "stock_count": 5527
+    },
+    {
+      "name": "筛选步骤1-2",
+      "duration_sec": 0.01,
+      "input_count": 5527,
+      "output_count": 5305
+    },
+    {
+      "name": "资金流预拉",
+      "duration_sec": 9.63
+    },
+    {
+      "name": "技术enrichment",
+      "duration_sec": 590.28,
+      "stock_count": 5305
+    },
+    {
+      "name": "筛选步骤3-4",
+      "duration_sec": 0.01,
+      "input_count": 5305,
+      "output_count": 2683
+    },
+    {
+      "name": "财务enrichment",
+      "duration_sec": 306.68,
+      "stock_count": 2683
+    },
+    {
+      "name": "市场环境指标",
+      "duration_sec": 0,
+      "index_count": 5
+    },
+    {
+      "name": "筛选步骤5",
+      "duration_sec": 0.01,
+      "input_count": 2683,
+      "output_count": 1000
+    },
+    {
+      "name": "北向与行业并行",
+      "duration_sec": 86.4,
+      "stock_count": 1000,
+      "industry_count": 0
+    },
+    {
+      "name": "多因子打分",
+      "duration_sec": 0.16,
+      "count": 1000,
+      "market_regime": "neutral",
+      "final_score_min": 15.2109,
+      "final_score_max": 71.3431,
+      "final_score_mean": 40.8285
+    }
+  ],
+  "mode": "正式模式（全市场）",
+  "target_count": 1000,
+  "screening_enabled": true,
+  "market_context_output": "D:\\BigACode\\BugASelect\\BigASelect\\output\\market_context_20260213.csv",
+  "sector_strength_output": "D:\\BigACode\\BugASelect\\BigASelect\\output\\sector_strength_20260213.csv",
+  "stock_pool_output": "D:\\BigACode\\BugASelect\\BigASelect\\output\\stock_pool_20260213.csv",
+  "stock_pool_count": 1000,
+  "stock_pool_field_stats": {
+    "total_stocks": 1000,
+    "fully_filled_stocks": 0,
+    "missing_by_field": {}
+  },
+  "stock_pool_score_summary": {
+    "count": 1000,
+    "market_regime": "neutral",
+    "final_score_min": 15.2109,
+    "final_score_max": 71.3431,
+    "final_score_mean": 40.8285,
+    "top5": [
+      {
+        "ts_code": "002297.SZ",
+        "name": "博云新材",
+        "final_score": 71.3431
+      },
+      {
+        "ts_code": "000681.SZ",
+        "name": "视觉中国",
+        "final_score": 64.688
+      },
+      {
+        "ts_code": "300480.SZ",
+        "name": "光力科技",
+        "final_score": 62.3105
+      },
+      {
+        "ts_code": "000612.SZ",
+        "name": "焦作万方",
+        "final_score": 61.7336
+      },
+      {
+        "ts_code": "301031.SZ",
+        "name": "中熔电气",
+        "final_score": 61.218
+      }
+    ]
+  },
+  "market_environment_alert": {
+    "alert": false,
+    "market_risk_index": 50.0,
+    "index_ma60_position": 1.9384,
+    "market_risk_index_max": 70,
+    "index_ma60_position_min": 0,
+    "message": "市场环境正常：market_risk_index=50.00，index_ma60_position=1.9384"
+  }
+}

@@ -1,0 +1,6 @@
+﻿index_code,index_name,index_close,index_change_pct,index_ma20_position,index_ma60_position,index_ma120_position,market_risk_index,market_breadth_up,market_breadth_down,market_money_flow,northbound_total_flow,vix_proxy,market_volatility_20d,sector_rotation_state
+000001,上证指数,4116.94,0.08,1.5664,3.7276,6.0259,40.0,1,0,,0.0,,9.0808,
+399006,创业板指,3295.523,0.5352,0.0773,3.5538,9.6103,40.0,1,0,,0.0,,18.1591,
+000688,科创50,1535.393,3.5333,7.1445,11.1118,15.3946,40.0,1,0,,0.0,,27.0562,
+899050,北证50,1519.75,0.1415,1.0682,3.1264,1.3141,40.0,1,0,,0.0,,26.8791,
+000300,沪深300,4723.069,0.0888,0.2674,1.9492,4.4178,40.0,1,0,,0.0,,10.6819,

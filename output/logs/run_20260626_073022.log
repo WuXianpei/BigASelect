@@ -1,0 +1,110 @@
+[运行日志] run_id=20260626_073022
+[运行日志] 日志文件: D:\BigACode\BugASelect\BigASelect\output\logs\run_20260626_073022.log
+==================================================
+BigASelect - A股股票筛选程序
+==================================================
+运行模式: 正式模式（全市场）
+行情模式: last_close
+交易日: 20260114
+目标股票池数量: 1000
+筛选规则已启用: True
+
+[1/3] 获取 A 股股票列表...
+      共获取 5529 只股票
+      耗时 0.3s
+[1/3] 轻量指标 enrichment（风险标识 + 流动性字段）...
+      获取最新收盘行情（数据截止 20260114，筛选步骤 1-2）...
+        腾讯批量行情 5529/5529 只
+      耗时 1.9s
+[1/3] 筛选步骤 1-2（风险剔除 + 流动性）...
+      步骤1 风险剔除: 5529 → 5300
+      步骤2 流动性过滤: 5300 → 5300
+      耗时 0.0s
+      步骤 1-2 后剩余 5300 只股票
+      预拉资金流（统一数据源: 同花顺）...
+        [警告] 同花顺个股即时 获取失败: 'NoneType' object has no attribute 'text'
+        [警告] 同花顺个股3日排行 获取失败: 'NoneType' object has no attribute 'text'
+        [警告] 同花顺个股5日排行 获取失败: 'NoneType' object has no attribute 'text'
+        [警告] 同花顺个股10日排行 获取失败: 'NoneType' object has no attribute 'text'
+        [警告] 同花顺行业即时 获取失败: 'NoneType' object has no attribute 'text'
+        [警告] 同花顺行业3日排行 获取失败: 'NoneType' object has no attribute 'text'
+        [警告] 同花顺行业10日排行 获取失败: 'NoneType' object has no attribute 'text'        [警告] 同花顺行业5日排行 获取失败: 'NoneType' object has no attribute 'text'
+
+      资金流预拉耗时 9.5s
+[1/3] 技术 enrichment（日K + 技术指标 + 同花顺资金流）...
+      构建行业映射...
+      计算技术指标与资金流（共 5300 只）...
+        技术 enrichment 进度 265/5300
+        技术 enrichment 进度 530/5300
+        技术 enrichment 进度 795/5300
+        技术 enrichment 进度 1060/5300
+        技术 enrichment 进度 1325/5300
+        技术 enrichment 进度 1590/5300
+        技术 enrichment 进度 1855/5300
+        技术 enrichment 进度 2120/5300
+        技术 enrichment 进度 2385/5300
+        技术 enrichment 进度 2650/5300
+        技术 enrichment 进度 2915/5300
+        技术 enrichment 进度 3180/5300
+        技术 enrichment 进度 3445/5300
+        技术 enrichment 进度 3710/5300
+        技术 enrichment 进度 3975/5300
+        技术 enrichment 进度 4240/5300
+        技术 enrichment 进度 4505/5300
+        技术 enrichment 进度 4770/5300
+        技术 enrichment 进度 5035/5300
+        技术 enrichment 进度 5300/5300
+      耗时 576.1s
+[1/3] 筛选步骤 3-4（趋势 + 资金持续性）...
+      步骤3 趋势结构过滤: 5300 → 2683
+      步骤4 资金持续性过滤: 已禁用，保留 2683 只
+      耗时 0.0s
+      步骤 3-4 后剩余 2683 只股票
+[1/3] 财务 enrichment（估值 + 财务，仅幸存者）...
+      计算估值与财务（共 2683 只）...
+        财务 enrichment 进度 134/2683
+        财务 enrichment 进度 268/2683
+        财务 enrichment 进度 402/2683
+        财务 enrichment 进度 536/2683
+        财务 enrichment 进度 670/2683
+        财务 enrichment 进度 804/2683
+        财务 enrichment 进度 938/2683
+        财务 enrichment 进度 1072/2683
+        财务 enrichment 进度 1206/2683
+        财务 enrichment 进度 1340/2683
+        财务 enrichment 进度 1474/2683
+        财务 enrichment 进度 1608/2683
+        财务 enrichment 进度 1742/2683
+        财务 enrichment 进度 1876/2683
+        财务 enrichment 进度 2010/2683
+        财务 enrichment 进度 2144/2683
+        财务 enrichment 进度 2278/2683
+        财务 enrichment 进度 2412/2683
+        财务 enrichment 进度 2546/2683
+        财务 enrichment 进度 2680/2683
+        财务 enrichment 进度 2683/2683
+      耗时 408.8s
+[1/3] 筛选步骤 5（估值财务）...
+      步骤5 估值财务过滤: 2683 → 1717
+      步骤6 市场环境: 不参与筛选（流程末尾输出告警）
+      耗时 0.0s
+      最终股票池 1000 只股票
+[1/3] 附加北向个股 northbound_flow（与行业强度并行）...
+        [警告] 行业汇总 获取失败: 'NoneType' object has no attribute 'text'
+      北向个股 northbound_flow: 成功 806，跳过 194 （非沪股通或暂无数据）
+      北向+行业并行耗时 86.8s
+
+[2/3] 市场环境指标已输出: D:\BigACode\BugASelect\BigASelect\output\market_context_20260114.csv
+
+[3/3] 行业强度已输出: D:\BigACode\BugASelect\BigASelect\output\sector_strength_20260114.csv（共 0 个行业）
+
+[1/3] 多因子打分（Value/Growth/Capital/Sector）...
+      市场档位: neutral，总分区间 [15.20, 69.52]，耗时 0.2s
+      已输出: D:\BigACode\BugASelect\BigASelect\output\stock_pool_20260114.csv
+      股票池 1000 只（批跑精简日志）
+
+
+      [市场环境] 市场环境正常：market_risk_index=40.00，index_ma60_position=4.3347
+==================================================
+完成！总耗时 1083.9s，请检查 output/ 目录。
+==================================================
