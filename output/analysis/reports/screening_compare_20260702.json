@@ -1,0 +1,261 @@
+{
+  "generated_at": "2026-07-02T17:20:03",
+  "return_col": "future_return_20",
+  "analysis_dates_count": 105,
+  "test_dates_count": 21,
+  "test_date_range": [
+    "20260506",
+    "20260603"
+  ],
+  "limitation": "归档 stock_pool 为筛选+按 amount 截 1000 后的结果，无法在归档上模拟「取消 step3」等放宽筛选；step3/step5 再过滤对当前归档几乎无影响。",
+  "full_sample": [
+    {
+      "scenario": "A_current_1000",
+      "avg_pool_size": 997.8,
+      "signal_days_top3": 99,
+      "top3_win_rate": 0.5791,
+      "top3_avg_return_pct": 9.2465,
+      "top3_max_loss_pct": -32.5999,
+      "top1_win_rate": 0.6162,
+      "ic_mean": 0.1046,
+      "ic_ir": 0.9326
+    },
+    {
+      "scenario": "B_amount_top800",
+      "avg_pool_size": 800.0,
+      "signal_days_top3": 99,
+      "top3_win_rate": 0.5758,
+      "top3_avg_return_pct": 9.6008,
+      "top3_max_loss_pct": -32.5999,
+      "top1_win_rate": 0.6061,
+      "ic_mean": 0.111,
+      "ic_ir": 0.9654,
+      "top3_overlap_with_baseline": {
+        "overlap_days": 87,
+        "comparable_days": 99,
+        "overlap_rate": 0.8787878787878788
+      }
+    },
+    {
+      "scenario": "C_amount_top500",
+      "avg_pool_size": 500.0,
+      "signal_days_top3": 99,
+      "top3_win_rate": 0.569,
+      "top3_avg_return_pct": 8.0456,
+      "top3_max_loss_pct": -32.5999,
+      "top1_win_rate": 0.596,
+      "ic_mean": 0.1106,
+      "ic_ir": 0.8851,
+      "top3_overlap_with_baseline": {
+        "overlap_days": 52,
+        "comparable_days": 99,
+        "overlap_rate": 0.5252525252525253
+      }
+    },
+    {
+      "scenario": "D_amount_top300",
+      "avg_pool_size": 300.0,
+      "signal_days_top3": 99,
+      "top3_win_rate": 0.5522,
+      "top3_avg_return_pct": 6.8249,
+      "top3_max_loss_pct": -32.5999,
+      "top1_win_rate": 0.5556,
+      "ic_mean": 0.0884,
+      "ic_ir": 0.6192,
+      "top3_overlap_with_baseline": {
+        "overlap_days": 23,
+        "comparable_days": 99,
+        "overlap_rate": 0.23232323232323232
+      }
+    },
+    {
+      "scenario": "E_liquidity_step5_recheck",
+      "avg_pool_size": 989.1,
+      "signal_days_top3": 99,
+      "top3_win_rate": 0.5791,
+      "top3_avg_return_pct": 9.2465,
+      "top3_max_loss_pct": -32.5999,
+      "top1_win_rate": 0.6162,
+      "ic_mean": 0.1057,
+      "ic_ir": 0.9418,
+      "top3_overlap_with_baseline": {
+        "overlap_days": 99,
+        "comparable_days": 99,
+        "overlap_rate": 1.0
+      }
+    },
+    {
+      "scenario": "F_stricter_liquidity",
+      "avg_pool_size": 975.1,
+      "signal_days_top3": 99,
+      "top3_win_rate": 0.5791,
+      "top3_avg_return_pct": 9.2465,
+      "top3_max_loss_pct": -32.5999,
+      "top1_win_rate": 0.6162,
+      "ic_mean": 0.1079,
+      "ic_ir": 0.9641,
+      "top3_overlap_with_baseline": {
+        "overlap_days": 99,
+        "comparable_days": 99,
+        "overlap_rate": 1.0
+      }
+    },
+    {
+      "scenario": "G_stricter_step5",
+      "avg_pool_size": 817.3,
+      "signal_days_top3": 99,
+      "top3_win_rate": 0.5488,
+      "top3_avg_return_pct": 8.0718,
+      "top3_max_loss_pct": -35.4242,
+      "top1_win_rate": 0.5859,
+      "ic_mean": 0.062,
+      "ic_ir": 0.6143,
+      "top3_overlap_with_baseline": {
+        "overlap_days": 26,
+        "comparable_days": 99,
+        "overlap_rate": 0.26262626262626265
+      }
+    },
+    {
+      "scenario": "H_liquidity_plus_stricter_step5",
+      "avg_pool_size": 808.8,
+      "signal_days_top3": 99,
+      "top3_win_rate": 0.5488,
+      "top3_avg_return_pct": 8.0718,
+      "top3_max_loss_pct": -35.4242,
+      "top1_win_rate": 0.5859,
+      "ic_mean": 0.0634,
+      "ic_ir": 0.625,
+      "top3_overlap_with_baseline": {
+        "overlap_days": 26,
+        "comparable_days": 99,
+        "overlap_rate": 0.26262626262626265
+      }
+    }
+  ],
+  "test_sample": [
+    {
+      "scenario": "A_current_1000",
+      "avg_pool_size": 999.8,
+      "signal_days_top3": 20,
+      "top3_win_rate": 0.4833,
+      "top3_avg_return_pct": 9.0715,
+      "top3_max_loss_pct": -25.9944,
+      "top1_win_rate": 0.6,
+      "ic_mean": 0.2053,
+      "ic_ir": 2.7572
+    },
+    {
+      "scenario": "B_amount_top800",
+      "avg_pool_size": 800.0,
+      "signal_days_top3": 20,
+      "top3_win_rate": 0.4833,
+      "top3_avg_return_pct": 9.0715,
+      "top3_max_loss_pct": -25.9944,
+      "top1_win_rate": 0.6,
+      "ic_mean": 0.2216,
+      "ic_ir": 3.0654,
+      "top3_overlap_with_baseline": {
+        "overlap_days": 20,
+        "comparable_days": 20,
+        "overlap_rate": 1.0
+      }
+    },
+    {
+      "scenario": "C_amount_top500",
+      "avg_pool_size": 500.0,
+      "signal_days_top3": 20,
+      "top3_win_rate": 0.4167,
+      "top3_avg_return_pct": 5.1829,
+      "top3_max_loss_pct": -25.9944,
+      "top1_win_rate": 0.45,
+      "ic_mean": 0.2493,
+      "ic_ir": 3.4187,
+      "top3_overlap_with_baseline": {
+        "overlap_days": 12,
+        "comparable_days": 20,
+        "overlap_rate": 0.6
+      }
+    },
+    {
+      "scenario": "D_amount_top300",
+      "avg_pool_size": 300.0,
+      "signal_days_top3": 20,
+      "top3_win_rate": 0.4167,
+      "top3_avg_return_pct": 7.774,
+      "top3_max_loss_pct": -25.9944,
+      "top1_win_rate": 0.4,
+      "ic_mean": 0.2529,
+      "ic_ir": 2.418,
+      "top3_overlap_with_baseline": {
+        "overlap_days": 4,
+        "comparable_days": 20,
+        "overlap_rate": 0.2
+      }
+    },
+    {
+      "scenario": "E_liquidity_step5_recheck",
+      "avg_pool_size": 991.2,
+      "signal_days_top3": 20,
+      "top3_win_rate": 0.4833,
+      "top3_avg_return_pct": 9.0715,
+      "top3_max_loss_pct": -25.9944,
+      "top1_win_rate": 0.6,
+      "ic_mean": 0.2081,
+      "ic_ir": 2.8415,
+      "top3_overlap_with_baseline": {
+        "overlap_days": 20,
+        "comparable_days": 20,
+        "overlap_rate": 1.0
+      }
+    },
+    {
+      "scenario": "F_stricter_liquidity",
+      "avg_pool_size": 978.2,
+      "signal_days_top3": 20,
+      "top3_win_rate": 0.4833,
+      "top3_avg_return_pct": 9.0715,
+      "top3_max_loss_pct": -25.9944,
+      "top1_win_rate": 0.6,
+      "ic_mean": 0.214,
+      "ic_ir": 3.0248,
+      "top3_overlap_with_baseline": {
+        "overlap_days": 20,
+        "comparable_days": 20,
+        "overlap_rate": 1.0
+      }
+    },
+    {
+      "scenario": "G_stricter_step5",
+      "avg_pool_size": 805.9,
+      "signal_days_top3": 20,
+      "top3_win_rate": 0.5333,
+      "top3_avg_return_pct": 11.3503,
+      "top3_max_loss_pct": -22.296,
+      "top1_win_rate": 0.6,
+      "ic_mean": 0.147,
+      "ic_ir": 1.6829,
+      "top3_overlap_with_baseline": {
+        "overlap_days": 4,
+        "comparable_days": 20,
+        "overlap_rate": 0.2
+      }
+    },
+    {
+      "scenario": "H_liquidity_plus_stricter_step5",
+      "avg_pool_size": 797.2,
+      "signal_days_top3": 20,
+      "top3_win_rate": 0.5333,
+      "top3_avg_return_pct": 11.3503,
+      "top3_max_loss_pct": -22.296,
+      "top1_win_rate": 0.6,
+      "ic_mean": 0.1504,
+      "ic_ir": 1.7522,
+      "top3_overlap_with_baseline": {
+        "overlap_days": 4,
+        "comparable_days": 20,
+        "overlap_rate": 0.2
+      }
+    }
+  ]
+}

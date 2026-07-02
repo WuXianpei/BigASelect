@@ -46,6 +46,10 @@ def build_report_payload(
 
     top1_stats: dict[str, Any] | None = None,
 
+    walk_forward: dict[str, Any] | None = None,
+
+    optimization: dict[str, Any] | None = None,
+
 ) -> dict[str, Any]:
 
     """组装报告 JSON 结构"""
@@ -79,6 +83,10 @@ def build_report_payload(
         "top3_stats": top3_stats or {},
 
         "top1_stats": top1_stats or {},
+
+        "walk_forward": walk_forward or {},
+
+        "optimization": optimization or {},
 
     }
 
@@ -267,6 +275,14 @@ def render_markdown_report(payload: dict[str, Any]) -> str:
 
 
 
+    wf = payload.get("walk_forward") or {}
+
+    if wf.get("enabled"):
+
+        lines.extend(_render_walk_forward_section(wf, primary, return_col))
+
+
+
     qmeans = quintile.get("quintile_means") or {}
 
     if qmeans:
@@ -345,9 +361,235 @@ def render_markdown_report(payload: dict[str, Any]) -> str:
 
         )
 
+    else:
+
+        opt = payload.get("optimization") or {}
+
+        if opt.get("proposed_written"):
+
+            rec = opt.get("recommend_replace")
+
+            lines.extend(["", "## 后续操作", ""])
+
+            if rec is True:
+
+                lines.append(
+
+                    "已生成 `factor_config.proposed.yaml`，**样本外测试集指标改善**，"
+
+                    "建议审阅后替换 `config/factor_config.yaml`。"
+
+                )
+
+            else:
+
+                lines.append(
+
+                    "已生成 `factor_config.proposed.yaml`，请结合 Walk-forward 段落人工审阅。"
+
+                )
+
+        elif opt.get("skip_reason"):
+
+            lines.extend(["", "## 后续操作", "", opt["skip_reason"] + "。"])
+
 
 
     return "\n".join(lines) + "\n"
+
+
+
+
+
+def _render_walk_forward_section(
+
+    wf: dict[str, Any],
+
+    primary: str,
+
+    return_col: str,
+
+) -> list[str]:
+
+    """Walk-forward 样本外评估 Markdown 段落"""
+
+    split = wf.get("split", {})
+
+    metric = wf.get("oos_primary_metric", "ic_ir")
+
+    metric_label = {
+
+        "ic_ir": "IC_IR",
+
+        "ic_mean": "IC 均值",
+
+        "quintile_spread": "五分位价差",
+
+    }.get(metric, metric)
+
+    opt_method = wf.get("optimization_method", "ridge_regime")
+    method_label = {
+        "ridge_regime": "Ridge 成分定权 + Regime 大类定权 + 因子池增删",
+        "ic_heuristic": "IC_IR 启发式调权 + 因子池增删",
+    }.get(opt_method, opt_method)
+    meta = wf.get("proposed_meta") or {}
+    ridge_alpha = meta.get("ridge_alpha")
+
+    lines = [
+
+        "",
+
+        "## 因子优化 Walk-forward（Ridge + Regime）",
+
+        "",
+
+        f"优化方法: **{method_label}**"
+        + (f"，Ridge α={ridge_alpha}" if ridge_alpha is not None else ""),
+
+        "",
+
+        f"训练 / 验证 / 测试切分（`{split.get('mode', 'fixed')}`）：",
+
+        f"- 训练: {len(split.get('train_dates', []))} 日"
+
+        f"（{ _date_range(split.get('train_dates')) }）",
+
+        f"- 验证: {len(split.get('validate_dates', []))} 日"
+
+        f"（{ _date_range(split.get('validate_dates')) }）",
+
+        f"- 测试: {len(split.get('test_dates', []))} 日"
+
+        f"（{ _date_range(split.get('test_dates')) }）",
+
+        "",
+
+        f"样本外主指标: `{primary}` 的 {metric_label}（Top-K 胜率不参与是否生成配置）",
+
+        "",
+
+        "| 分段 | 当前配置 | 建议配置 |",
+
+        "|------|----------|----------|",
+
+    ]
+
+    for label, title in (
+
+        ("train", "训练"),
+
+        ("validate", "验证"),
+
+        ("test", "测试(OOS)"),
+
+    ):
+
+        b = _metric_from_eval(wf.get("baseline", {}).get(label, {}), metric)
+
+        p = _metric_from_eval(wf.get("proposed", {}).get(label, {}), metric)
+
+        lines.append(f"| {title} | {b} | {p} |")
+
+    imp = wf.get("test_improvement", {})
+
+    lines.extend(
+
+        [
+
+            "",
+
+            f"- 测试集 {metric_label}: 当前 **{imp.get('baseline')}** → 建议 **{imp.get('proposed')}**",
+
+            f"- 样本外是否改善: **{'是' if imp.get('improved') else '否'}**",
+
+            f"- 是否推荐替换: **{'是' if wf.get('recommend_replace') else '否'}**",
+
+        ]
+
+    )
+
+    lines.extend(_render_factor_pool_section(wf.get("factor_pool") or {}))
+
+    return lines
+
+
+
+
+
+def _render_factor_pool_section(pool: dict[str, Any]) -> list[str]:
+    """因子池增删建议（报告参考；是否写入 proposed 由样本外门禁决定）"""
+    if not pool.get("enabled"):
+        return []
+
+    lines = ["", "### 因子池增删建议", ""]
+    removals = pool.get("removal_candidates") or []
+    additions = pool.get("addition_candidates") or []
+    applied = pool.get("applied_changes") or []
+
+    if removals:
+        lines.append("**建议剔除（训练集 IC_IR 偏弱）:**")
+        for r in removals:
+            lines.append(
+                f"- `{r.get('factor')}.{r.get('field')}` IC_IR={r.get('ic_ir')} "
+                f"（{r.get('ic_days')} 日）"
+            )
+    else:
+        lines.append("- 建议剔除: 无")
+
+    if pool.get("addition_skipped_reason"):
+        lines.append(f"- 建议新增: {pool['addition_skipped_reason']}")
+    elif additions:
+        lines.append("**建议新增（白名单候选）:**")
+        for a in additions:
+            lines.append(
+                f"- `{a.get('factor')}.{a.get('field')}` IC_IR={a.get('ic_ir')} "
+                f"（{a.get('ic_days')} 日）"
+            )
+    else:
+        lines.append("- 建议新增: 无（或未达样本门槛）")
+
+    if applied:
+        lines.extend(["", "**已纳入本次 proposed 验证的变更:**"])
+        for ch in applied:
+            lines.append(f"- {ch}")
+    else:
+        lines.append("")
+        lines.append("本次未对 proposed 做增删（无候选或仅报告参考）。")
+
+    return lines
+
+
+def _date_range(dates: list[str] | None) -> str:
+
+    if not dates:
+
+        return "-"
+
+    if len(dates) == 1:
+
+        return dates[0]
+
+    return f"{dates[0]} … {dates[-1]}"
+
+
+
+
+
+def _metric_from_eval(eval_result: dict[str, Any], metric: str) -> str:
+
+    if metric == "quintile_spread":
+
+        val = eval_result.get("quintile", {}).get("quintile_spread")
+
+    elif metric == "ic_mean":
+
+        val = eval_result.get("ic", {}).get("ic_mean")
+
+    else:
+
+        val = eval_result.get("ic", {}).get("ic_ir")
+
+    return str(val) if val is not None else "-"
 
 
 

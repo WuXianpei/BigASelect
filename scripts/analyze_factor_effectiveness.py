@@ -16,6 +16,8 @@ from pathlib import Path
 
 
 
+from typing import Any
+
 import pandas as pd
 
 
@@ -56,6 +58,8 @@ from src.factor_analyzer.metrics import (  # noqa: E402
 
     compute_component_ic,
 
+    compute_component_ic_stats,
+
     compute_daily_ic_panel,
 
     compute_quintile_stats,
@@ -70,9 +74,13 @@ from src.factor_analyzer.metrics import (  # noqa: E402
 
 from src.factor_analyzer.optimizer import propose_factor_config, write_proposed_config  # noqa: E402
 
+from src.factor_analyzer.ridge_optimizer import propose_factor_config_ridge_regime  # noqa: E402
+
 from src.factor_analyzer.report import build_report_payload, write_reports  # noqa: E402
 
 from src.factor_analyzer.rescorer import rescore_archived_day  # noqa: E402
+
+from src.factor_analyzer.walk_forward import run_walk_forward_optimization  # noqa: E402
 
 from src.factor_analyzer.return_backfill import (  # noqa: E402
 
@@ -86,6 +94,18 @@ from src.network_setup import setup_network  # noqa: E402
 
 
 
+
+
+def _sanitize_walk_forward_for_report(wf: dict[str, Any]) -> dict[str, Any]:
+    """报告 JSON 不包含完整 proposed_config 正文"""
+    if not wf:
+        return {}
+    out = {k: v for k, v in wf.items() if k != "proposed_config"}
+    meta = wf.get("proposed_meta") or {}
+    if meta:
+        out["proposed_change_count"] = len(meta.get("changes", []))
+        out["tune_mode"] = meta.get("tune_mode")
+    return out
 
 
 def run_analysis(args: argparse.Namespace) -> int:
@@ -106,7 +126,7 @@ def run_analysis(args: argparse.Namespace) -> int:
 
     min_days = args.min_days if args.min_days is not None else window_cfg.get("min_trading_days", 60)
 
-    max_days = args.days if args.days is not None else window_cfg.get("max_trading_days", 120)
+    max_days = args.days if args.days is not None else window_cfg.get("max_trading_days", 300)
 
     return_horizon = window_cfg.get("return_horizon", 20)
 
@@ -318,7 +338,19 @@ def run_analysis(args: argparse.Namespace) -> int:
 
 
 
-    component_ic = compute_component_ic(panel, factor_config, return_col=return_col)
+    component_stats_full = compute_component_ic_stats(
+
+        panel,
+
+        factor_config,
+
+        return_col=return_col,
+
+        time_decay=analysis_cfg.get("proposed_config", {}).get("time_decay"),
+
+    )
+
+    component_ic = {f: s.get("ic_mean", 0.0) for f, s in component_stats_full.items()}
 
     ref_cfg = analysis_cfg.get("strategy_reference", {})
     top_k = int(ref_cfg.get("top_k", 3))
@@ -343,7 +375,168 @@ def run_analysis(args: argparse.Namespace) -> int:
 
 
 
-    print("[4/4] 生成报告...")
+    print("[4/4] 生成报告与因子优化...")
+
+    proposed_cfg = analysis_cfg.get("proposed_config", {})
+
+    walk_forward_result: dict = {"enabled": False}
+
+    if proposed_cfg.get("enabled", True) and analysis_cfg.get("walk_forward", {}).get(
+
+        "enabled", True
+
+    ):
+
+        print("      Walk-forward 样本外评估...")
+
+        walk_forward_result = run_walk_forward_optimization(
+
+            panel,
+
+            analysis_dates,
+
+            factor_config=factor_config,
+
+            analysis_cfg=analysis_cfg,
+
+            primary_score=primary_score,
+
+            return_col=return_col,
+
+            archive_root=archive_root,
+
+        )
+
+        if walk_forward_result.get("enabled"):
+
+            imp = walk_forward_result.get("test_improvement", {})
+
+            print(
+
+                f"      测试集 {imp.get('metric')}:"
+
+                f" {imp.get('baseline')} -> {imp.get('proposed')}"
+
+                f"（{'改善' if imp.get('improved') else '未改善'}）"
+
+            )
+
+
+
+    optimization_meta: dict = {}
+
+    proposed_path = None
+
+    run_optimization = proposed_cfg.get("enabled", True) and (
+
+        proposed_cfg.get("always_propose", True)
+
+        or verdict.get("status") == "ineffective"
+
+        or walk_forward_result.get("enabled")
+
+    )
+
+    if run_optimization:
+
+        if walk_forward_result.get("enabled") and walk_forward_result.get("proposed_config"):
+
+            proposed = walk_forward_result["proposed_config"]
+
+            tune_mode = "walk_forward"
+
+            recommend = walk_forward_result.get("recommend_replace")
+
+        else:
+
+            tune_mode = (
+
+                "ineffective" if verdict.get("status") == "ineffective" else "soft_tune"
+
+            )
+
+            opt_method = str(proposed_cfg.get("optimization_method", "ridge_regime"))
+
+            if opt_method == "ridge_regime":
+
+                proposed = propose_factor_config_ridge_regime(
+
+                    factor_config,
+
+                    panel,
+
+                    proposed_cfg,
+
+                    return_col=return_col,
+
+                    tune_mode=tune_mode,
+
+                )
+
+            else:
+
+                proposed = propose_factor_config(
+
+                    factor_config,
+
+                    component_stats_full,
+
+                    proposed_cfg,
+
+                    tune_mode=tune_mode,
+
+                )
+
+            recommend = None
+
+        # 仅样本外改善或模型失效时写入文件；仅供参考时不生成
+
+        write_proposed = (
+
+            verdict.get("status") == "ineffective"
+
+            or recommend is True
+
+        )
+
+        optimization_meta = {
+
+            "proposed_written": write_proposed,
+
+            "tune_mode": tune_mode,
+
+            "recommend_replace": recommend,
+
+            "optimization_method": str(proposed_cfg.get("optimization_method", "ridge_regime")),
+
+        }
+
+        if write_proposed:
+
+            proposed_path = proposed_dir / "factor_config.proposed.yaml"
+
+            write_proposed_config(proposed, proposed_path, recommend=recommend)
+
+            optimization_meta["proposed_path"] = str(proposed_path)
+
+            print(f"      建议配置: {proposed_path}")
+
+        elif recommend is False:
+
+            optimization_meta["skip_reason"] = "样本外测试集未改善，未生成配置文件"
+
+            stale = proposed_dir / "factor_config.proposed.yaml"
+
+            if stale.exists():
+
+                stale.unlink()
+
+            print("      样本外未改善，未生成 factor_config.proposed.yaml")
+
+        else:
+
+            optimization_meta["skip_reason"] = "当前模型有效且无样本外推荐，未生成配置文件"
+
 
     payload = build_report_payload(
 
@@ -369,6 +562,10 @@ def run_analysis(args: argparse.Namespace) -> int:
 
         top1_stats=top1_stats,
 
+        walk_forward=_sanitize_walk_forward_for_report(walk_forward_result),
+
+        optimization=optimization_meta,
+
     )
 
     md_path, json_path = write_reports(
@@ -376,34 +573,6 @@ def run_analysis(args: argparse.Namespace) -> int:
         payload, reports_dir=reports_dir, prefix=report_prefix
 
     )
-
-
-
-    proposed_path = None
-
-    if (
-
-        verdict.get("status") == "ineffective"
-
-        and analysis_cfg.get("proposed_config", {}).get("enabled", True)
-
-    ):
-
-        proposed = propose_factor_config(
-
-            factor_config,
-
-            component_ic,
-
-            analysis_cfg.get("proposed_config", {}),
-
-        )
-
-        proposed_path = proposed_dir / "factor_config.proposed.yaml"
-
-        write_proposed_config(proposed, proposed_path)
-
-        print(f"      建议配置: {proposed_path}")
 
 
 
@@ -452,7 +621,11 @@ def run_analysis(args: argparse.Namespace) -> int:
 
     if proposed_path:
 
-        print(f"请审阅并手动替换: config/factor_config.yaml ← {proposed_path.name}")
+        print("样本外改善，建议审阅 proposed 后替换 config/factor_config.yaml")
+
+    elif optimization_meta.get("skip_reason"):
+
+        print(optimization_meta["skip_reason"])
 
     print(f"耗时 {dur:.1f}s")
 
@@ -468,7 +641,7 @@ def main() -> None:
 
     parser = argparse.ArgumentParser(description="因子有效性分析（future_return_20）")
 
-    parser.add_argument("--days", type=int, default=None, help="最大分析交易日数（默认 120）")
+    parser.add_argument("--days", type=int, default=None, help="最大分析交易日数（默认 300）")
 
     parser.add_argument("--min-days", type=int, default=None, help="最低样本日数（默认 60）")
 

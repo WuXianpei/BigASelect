@@ -1,22 +1,22 @@
 # 股票筛选规则配置
-# 按顺序执行六步筛选，全部通过后纳入股票池
+# 仅保留步骤 1/2/5（风险、流动性、估值财务），趋势选股交给因子打分
 
-version: "2.0.0"
+version: "2.1.0"
 enabled: true
-target_count: 1000
+target_count: null  # null 或 <=0 表示不截断
 
-# 筛选后排序（用于超过 target_count 时截取）
+# 筛选后排序（仅在有 target_count 截断时生效）
 sort_by:
   - field: amount
     order: desc
 
-# 六步筛选阈值
+# 筛选阈值
 params:
   # 第二步：流动性（成交额单位：元，换手率单位：%）
-  min_amount: 30000000        # 3000万
-  min_turnover_rate: 0.3      # 0.3%
+  min_amount: 50000000        # 5000万
+  min_turnover_rate: 1.0      # 1.0%
 
-  # 第三步：趋势结构（满足任一条件即剔除）
+  # 第三步：趋势结构（已禁用，参数保留供对照实验）
   return_90d_threshold: -20     # %
   price_percentile_1y_max: 20   # 0-100 尺度，低于 20 视为低位
 
@@ -37,12 +37,15 @@ params:
 steps:
   - id: step_1
     name: 风险与不可交易剔除
+    enabled: true
     description: 剔除 is_st=1、is_suspended=1 或 risk_flag=1
   - id: step_2
     name: 流动性过滤
-    description: 剔除 amount < 3000万 或 turnover_rate < 0.3%
+    enabled: true
+    description: 剔除 amount < 5000万 或 turnover_rate < 1.0%
   - id: step_3
     name: 趋势结构过滤
+    enabled: false
     description: 剔除 ma60<ma120，或 return_90d<-20% 且 price_percentile_1y<20
   - id: step_4
     name: 资金持续性过滤
@@ -50,7 +53,9 @@ steps:
     description: 剔除 main_net_inflow_3d<0 且 main_net_inflow_5d<0 且 sector_money_flow_3d<0
   - id: step_5
     name: 估值与财务风险过滤
+    enabled: true
     description: 剔除 pe/pb/利润/负债率极端异常
   - id: step_6
     name: 市场环境告警
+    enabled: true
     description: 流程末尾检查 market_risk_index 与 index_ma60_position，仅日志告警不入池筛选

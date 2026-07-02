@@ -34,6 +34,24 @@ def _is_step_enabled(rules_config: dict[str, Any], step_id: str) -> bool:
     return True
 
 
+def _should_truncate_pool(rules_config: dict[str, Any]) -> bool:
+    """target_count 为 null 或 <=0 时不截断"""
+    target = rules_config.get("target_count")
+    if target is None:
+        return False
+    try:
+        return int(target) > 0
+    except (TypeError, ValueError):
+        return False
+
+
+def format_target_count_label(rules_config: dict[str, Any]) -> str:
+    """日志用：描述目标池规模"""
+    if not _should_truncate_pool(rules_config):
+        return "不截断"
+    return str(int(rules_config["target_count"]))
+
+
 def apply_screening_phase1(
     df: pd.DataFrame,
     rules_config: dict[str, Any],
@@ -46,12 +64,18 @@ def apply_screening_phase1(
     result = df.copy()
     before = len(result)
 
-    result = _step1_risk_filter(result)
-    print(f"      步骤1 风险剔除: {before} → {len(result)}")
+    if _is_step_enabled(rules_config, "step_1"):
+        result = _step1_risk_filter(result)
+        print(f"      步骤1 风险剔除: {before} → {len(result)}")
+    else:
+        print(f"      步骤1 风险剔除: 已禁用，保留 {len(result)} 只")
 
     before = len(result)
-    result = _step2_liquidity_filter(result, params)
-    print(f"      步骤2 流动性过滤: {before} → {len(result)}")
+    if _is_step_enabled(rules_config, "step_2"):
+        result = _step2_liquidity_filter(result, params)
+        print(f"      步骤2 流动性过滤: {before} → {len(result)}")
+    else:
+        print(f"      步骤2 流动性过滤: 已禁用，保留 {len(result)} 只")
 
     return result.reset_index(drop=True)
 
@@ -75,14 +99,18 @@ def apply_screening_trend_capital(
         return df
 
     params = rules_config.get("params", {})
+    step3_on = _is_step_enabled(rules_config, "step_3")
     step4_on = _is_step_enabled(rules_config, "step_4")
     result = df.copy()
     if step4_on:
         result = _attach_sector_money_flow_3d(result)
 
     before = len(result)
-    result = _step3_trend_structure_filter(result, params)
-    print(f"      步骤3 趋势结构过滤: {before} → {len(result)}")
+    if step3_on:
+        result = _step3_trend_structure_filter(result, params)
+        print(f"      步骤3 趋势结构过滤: {before} → {len(result)}")
+    else:
+        print(f"      步骤3 趋势结构过滤: 已禁用，保留 {len(result)} 只")
 
     before = len(result)
     if step4_on:
@@ -108,13 +136,17 @@ def apply_screening_fundamental_market(
     result = df.copy()
 
     before = len(result)
-    result = _step5_fundamental_filter(result, params)
-    print(f"      步骤5 估值财务过滤: {before} → {len(result)}")
+    if _is_step_enabled(rules_config, "step_5"):
+        result = _step5_fundamental_filter(result, params)
+        print(f"      步骤5 估值财务过滤: {before} → {len(result)}")
+    else:
+        print(f"      步骤5 估值财务过滤: 已禁用，保留 {len(result)} 只")
 
     result = result.drop(columns=["_sector_money_flow_3d"], errors="ignore")
     print(f"      步骤6 市场环境: 不参与筛选（流程末尾输出告警）")
 
-    result = _apply_sort(result, rules_config)
+    if _should_truncate_pool(rules_config):
+        result = _apply_sort(result, rules_config)
     return _truncate_pool(result, rules_config)
 
 
@@ -128,14 +160,18 @@ def apply_screening_phase2_legacy(
         return _truncate_pool(df, rules_config)
 
     params = rules_config.get("params", {})
+    step3_on = _is_step_enabled(rules_config, "step_3")
     step4_on = _is_step_enabled(rules_config, "step_4")
     result = df.copy()
     if step4_on:
         result = _attach_sector_money_flow_3d(result)
 
     before = len(result)
-    result = _step3_trend_structure_filter(result, params)
-    print(f"      步骤3 趋势结构过滤: {before} → {len(result)}")
+    if step3_on:
+        result = _step3_trend_structure_filter(result, params)
+        print(f"      步骤3 趋势结构过滤: {before} → {len(result)}")
+    else:
+        print(f"      步骤3 趋势结构过滤: 已禁用，保留 {len(result)} 只")
 
     before = len(result)
     if step4_on:
@@ -145,13 +181,17 @@ def apply_screening_phase2_legacy(
         print(f"      步骤4 资金持续性过滤: 已禁用，保留 {len(result)} 只")
 
     before = len(result)
-    result = _step5_fundamental_filter(result, params)
-    print(f"      步骤5 估值财务过滤: {before} → {len(result)}")
+    if _is_step_enabled(rules_config, "step_5"):
+        result = _step5_fundamental_filter(result, params)
+        print(f"      步骤5 估值财务过滤: {before} → {len(result)}")
+    else:
+        print(f"      步骤5 估值财务过滤: 已禁用，保留 {len(result)} 只")
 
     result = result.drop(columns=["_sector_money_flow_3d"], errors="ignore")
     print(f"      步骤6 市场环境: 不参与筛选（流程末尾输出告警）")
 
-    result = _apply_sort(result, rules_config)
+    if _should_truncate_pool(rules_config):
+        result = _apply_sort(result, rules_config)
     return _truncate_pool(result, rules_config)
 
 
@@ -382,6 +422,8 @@ def _apply_sort(df: pd.DataFrame, rules_config: dict[str, Any]) -> pd.DataFrame:
 
 
 def _truncate_pool(df: pd.DataFrame, rules_config: dict[str, Any]) -> pd.DataFrame:
-    """截取目标股票池数量"""
-    target = rules_config.get("target_count", 1000)
+    """截取目标股票池数量；未配置 target_count 时原样返回"""
+    if not _should_truncate_pool(rules_config):
+        return df.copy()
+    target = int(rules_config["target_count"])
     return df.head(target).copy()

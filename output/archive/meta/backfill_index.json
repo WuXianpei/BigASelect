@@ -122,7 +122,9 @@
     "20260625",
     "20260626",
     "20260629",
-    "20260630"
+    "20260630",
+    "20260701",
+    "20260702"
   ],
   "failed": {},
   "run_plan": {
@@ -253,7 +255,7 @@
       "20260629"
     ]
   },
-  "updated_at": "2026-07-01T10:19:38+08:00",
+  "updated_at": "2026-07-02T16:25:35+08:00",
   "details": {
     "20260324": {
       "status": "completed",
@@ -869,6 +871,16 @@
       "status": "completed",
       "stock_count": 985,
       "duration_sec": 781.68
+    },
+    "20260701": {
+      "status": "completed",
+      "stock_count": 891,
+      "duration_sec": 2895.03
+    },
+    "20260702": {
+      "status": "completed",
+      "stock_count": 909,
+      "duration_sec": 3115.25
     }
   }
 }

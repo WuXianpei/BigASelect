@@ -8,12 +8,12 @@ echo ==================================================
 echo   BigASelect - 历史批跑（筛选 + 打分 -^> archive）
 echo ==================================================
 echo.
-echo 默认: 截止「最新可用收盘日」（已收盘含当天），向前 60 个交易日
+echo 默认: 截止「最新可用收盘日」，向前最多 300 个交易日
 echo 归档: output\archive\stock_pool、market_context、sector_strength
-echo 断点续跑: 已归档日期自动跳过（见 output\archive\meta\backfill_index.json）
+echo 断点续跑: 已归档跳过；未归档日优先从最近日期开始
 echo.
 echo 可选参数示例:
-echo   python scripts\backfill_history.py --days 120
+echo   python scripts\backfill_history.py --days 300
 echo   python scripts\backfill_history.py --dry-run
 echo   python scripts\backfill_history.py --force
 echo.

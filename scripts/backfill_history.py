@@ -32,7 +32,7 @@ def _resolve_day_count(args: argparse.Namespace, cfg: dict) -> int:
     bf = cfg.get("backfill", {})
     days = args.days if args.days is not None else bf.get("default_days", 60)
     min_days = bf.get("min_days", 60)
-    max_days = bf.get("max_days", 120)
+    max_days = bf.get("max_days", 300)
     days = max(min_days, min(max_days, days))
     return days
 
@@ -54,8 +54,9 @@ def _plan_dates(
     force: bool,
     skip_existing: bool,
     root: Path,
+    newest_first: bool = True,
 ) -> tuple[list[str], list[str]]:
-    """返回 (待跑日期升序, 已跳过日期)"""
+    """返回 (待跑日期列表, 已跳过日期)；默认待跑由近及远（最新未归档优先）"""
     all_dates = get_trading_days_window(end_date, day_count)
     pending: list[str] = []
     skipped: list[str] = []
@@ -64,6 +65,8 @@ def _plan_dates(
             skipped.append(d)
         else:
             pending.append(d)
+    if newest_first:
+        pending.reverse()
     return pending, skipped
 
 
@@ -80,6 +83,7 @@ def run_backfill(args: argparse.Namespace) -> int:
     skip_existing = bf.get("skip_existing", True) and not args.force
     continue_on_error = bf.get("continue_on_error", True) and not args.stop_on_error
     also_output = bf.get("also_write_output", True)
+    newest_first = bool(bf.get("newest_first", True))
 
     pending, skipped = _plan_dates(
         end_date,
@@ -87,6 +91,7 @@ def run_backfill(args: argparse.Namespace) -> int:
         force=args.force,
         skip_existing=skip_existing,
         root=root,
+        newest_first=newest_first,
     )
 
     print("=" * 50)
@@ -96,6 +101,9 @@ def run_backfill(args: argparse.Namespace) -> int:
     print(f"回溯窗口: {day_count} 个交易日")
     print(f"归档目录: {root}")
     print(f"待跑: {len(pending)} 日，已跳过: {len(skipped)} 日")
+    if pending:
+        order_hint = "由近及远" if newest_first else "由远及近"
+        print(f"执行顺序: {order_hint}（首跑 {pending[0]}）")
     if skipped and not args.dry_run:
         print(f"跳过示例: {skipped[0]} … {skipped[-1]}" if len(skipped) > 1 else f"跳过: {skipped[0]}")
     print()
@@ -184,7 +192,7 @@ def main() -> None:
         "--days",
         type=int,
         default=None,
-        help="回溯交易日数量（默认 config/backfill_history.yaml，60~120）",
+        help="回溯交易日数量（默认 config/backfill_history.yaml，60~300）",
     )
     parser.add_argument(
         "--end-date",

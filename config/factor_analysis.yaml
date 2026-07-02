@@ -12,7 +12,7 @@ window:
 
   min_trading_days: 40
 
-  max_trading_days: 100
+  max_trading_days: 300
 
   return_horizon: 20          # 未来 N 个交易日收益率
 
@@ -77,14 +77,64 @@ output:
 
 
 proposed_config:
-
   enabled: true
-
+  always_propose: true              # 始终跑 Walk-forward 并写入报告；配置文件仅在样本外改善或失效时生成
   source_note: "由因子有效性分析自动生成，请人工审阅后替换 config/factor_config.yaml"
-
-  ic_boost_factor: 5.0
-
+  optimization_method: ridge_regime   # ridge_regime | ic_heuristic
+  use_ic_ir: true                   # ic_heuristic 模式专用
+  ic_boost_factor: 3.0
   min_component_weight: 0.05
+  max_weight_change_ratio: 0.30     # 成分权重单次最大变动 ±30%
+  negative_signal_threshold: 0.0
+  opposite_direction_penalty: 0.5
+  signal_clip: 2.0
+  time_decay:                        # ic_heuristic 模式专用
+    enabled: true
+    recent_days: 20
+    recent_weight: 2.0
+    older_weight: 0.5
+  ridge:
+    alphas: [0.1, 1.0, 10.0]
+    alpha_select: min_train_rss      # min_train_rss | fixed
+    fixed_alpha: 1.0
+    regime_alpha: 10.0               # 大类权重 Ridge（样本更少，略强正则）
+    standardize: true
+    min_field_coverage: 0.5          # 字段覆盖率低于此值则不纳入 Ridge
+  regime:
+    min_days: 8                      # 每档最少交易日，不足则保留原权重
+    min_rows: 500
+    max_category_weight_change: 0.15 # 大类权重单次最大变动 ±15%
+
+# Walk-forward 样本外验证（C 方案）
+walk_forward:
+  enabled: true
+  train_days: 90
+  validate_days: 30
+  test_days: 40
+  min_total_days: 160               # 90+30+40；低于此日数则按比例切分或跳过
+  oos_primary_metric: ic_ir         # ic_mean | ic_ir | quintile_spread
+  require_test_improvement: true    # 测试集须改善才推荐替换
+
+# 因子池增删（训练集提名 → Walk-forward 测试门禁 → 人工替换）
+factor_pool:
+  enabled: true
+  removal:
+    enabled: true
+    ic_ir_max: 0.0                 # 训练集 IC_IR 低于此值可提名剔除
+    min_ic_days: 15
+    max_per_run: 2                 # 每次最多删 2 个成分
+  addition:
+    enabled: true
+    min_analysis_days: 200          # 分析窗口不足时只报告、不纳入 proposed
+    min_ic_days: 15
+    ic_ir_min: 0.05
+    max_per_run: 1
+    initial_weight: 0.15
+    candidates:                    # field -> 归属大类
+      volatility_20d: growth
+      price_above_ma60_days: growth
+      main_net_inflow_5d: capital
+      price_percentile_1y: value
 
 
 

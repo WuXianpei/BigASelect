@@ -5,14 +5,16 @@ archive:
   root: output/archive
 
 backfill:
-  # 默认向前回溯交易日数量（最少 60，最多 120）
-  default_days: 120
-  max_days: 120
+  # 默认向前回溯交易日数量（最少 60，最多 300）
+  default_days: 300
+  max_days: 300
   min_days: 60
   # 截止日：null = 最新可用收盘日（已收盘则含当天，与 quote_mode 一致）
   end_date: null
   # 已归档则跳过（断点续跑）
   skip_existing: true
+  # 待跑日期优先从最近未归档日开始（由近及远）
+  newest_first: true
   # 是否同时写入 output/（便于查看最新一天；批跑建议 true）
   also_write_output: true
   # 失败时继续下一日（true=续跑；false=立即停止）

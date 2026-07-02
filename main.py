@@ -41,6 +41,7 @@ from src.screener import (
     apply_screening_fundamental_market,
     apply_screening_phase1,
     apply_screening_trend_capital,
+    format_target_count_label,
     print_market_environment_alert,
 )  # noqa: E402
 from src.stock_enricher import enrich_financial_pool, enrich_light, enrich_technical_pool  # noqa: E402
@@ -186,7 +187,7 @@ def _run_pipeline(
     print(f"运行模式: {mode_label}")
     print(f"行情模式: {settings.get('quote_mode', 'last_close')}")
     print(f"交易日: {trade_date}")
-    print(f"目标股票池数量: {rules.get('target_count', 1000)}")
+    print(f"目标股票池数量: {format_target_count_label(rules)}")
     print(f"筛选规则已启用: {rules.get('enabled', False)}")
     if is_test:
         print(f"测试样本: {len(settings.get('test_symbols', []))} 只")
@@ -195,7 +196,7 @@ def _run_pipeline(
     logger.set_extra(
         mode=mode_label,
         trade_date=trade_date,
-        target_count=rules.get("target_count", 1000),
+        target_count=format_target_count_label(rules),
         screening_enabled=rules.get("enabled", False),
     )
 

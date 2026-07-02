@@ -182,7 +182,21 @@ def compute_component_ic(
     factor_config: dict[str, Any],
     return_col: str = "future_return_20",
 ) -> dict[str, float]:
-    """各成分字段跨日平均 IC（用于 proposed 配置）"""
+    """各成分字段跨日平均 IC（兼容旧接口）"""
+    stats = compute_component_ic_stats(panel, factor_config, return_col=return_col)
+    return {field: s.get("ic_mean", 0.0) for field, s in stats.items()}
+
+
+def compute_component_ic_stats(
+    panel: pd.DataFrame,
+    factor_config: dict[str, Any],
+    return_col: str = "future_return_20",
+    *,
+    time_decay: dict[str, Any] | None = None,
+) -> dict[str, dict[str, Any]]:
+    """
+    各成分字段 IC 统计（含时间衰减加权均值与 IC_IR），供 A 方案调权使用。
+    """
     fields: set[str] = set()
     for factor_cfg in factor_config.get("factors", {}).values():
         for comp in factor_cfg.get("components", []):
@@ -190,18 +204,145 @@ def compute_component_ic(
             if field:
                 fields.add(field)
 
-    result: dict[str, list[float]] = {f: [] for f in fields}
+    series: dict[str, list[tuple[str, float]]] = {f: [] for f in fields}
     for td, grp in panel.groupby("trade_date"):
+        td_str = str(td)
         for field in fields:
             if field not in grp.columns:
                 continue
             ic = _daily_spearman(grp[field], grp[return_col])
             if ic is not None:
-                result[field].append(ic)
+                series[field].append((td_str, ic))
 
+    decay_cfg = time_decay or {}
+    use_decay = bool(decay_cfg.get("enabled", False))
+    recent_days = int(decay_cfg.get("recent_days", 20))
+    recent_w = float(decay_cfg.get("recent_weight", 2.0))
+    older_w = float(decay_cfg.get("older_weight", 0.5))
+
+    result: dict[str, dict[str, Any]] = {}
+    for field, points in series.items():
+        if not points:
+            result[field] = {
+                "ic_mean": 0.0,
+                "ic_mean_weighted": 0.0,
+                "ic_std": 0.0,
+                "ic_ir": 0.0,
+                "ic_days": 0,
+            }
+            continue
+
+        points.sort(key=lambda x: x[0])
+        dates = [p[0] for p in points]
+        ics = [p[1] for p in points]
+        ic_arr = np.array(ics, dtype=float)
+
+        if use_decay and len(ics) > 0:
+            weights = _time_decay_weights(len(ics), recent_days, recent_w, older_w)
+            wsum = float(np.sum(weights))
+            wmean = float(np.sum(ic_arr * weights) / wsum) if wsum > 0 else float(ic_arr.mean())
+        else:
+            wmean = float(ic_arr.mean())
+
+        std = float(ic_arr.std(ddof=1)) if len(ic_arr) > 1 else 0.0
+        ir = wmean / std if std > 1e-9 else 0.0
+        result[field] = {
+            "ic_mean": round(float(ic_arr.mean()), 4),
+            "ic_mean_weighted": round(wmean, 4),
+            "ic_std": round(std, 4),
+            "ic_ir": round(ir, 4),
+            "ic_days": len(ics),
+        }
+
+    return result
+
+
+def _time_decay_weights(
+    n: int,
+    recent_days: int,
+    recent_weight: float,
+    older_weight: float,
+) -> np.ndarray:
+    """按距窗口末尾的天数分配衰减权重（末尾 recent_days 日权重更高）"""
+    weights = np.empty(n, dtype=float)
+    for i in range(n):
+        age_from_end = n - 1 - i
+        weights[i] = recent_weight if age_from_end < recent_days else older_weight
+    return weights
+
+
+def split_walk_forward_dates(
+    dates: list[str],
+    *,
+    train_days: int = 60,
+    validate_days: int = 20,
+    test_days: int = 20,
+    min_total_days: int = 80,
+) -> dict[str, Any]:
+    """
+    按时间顺序切分 walk-forward 窗口：训练 | 验证 | 测试（C 方案）。
+    日期不足时按比例 60/20/20 切分；总样本低于 min_total_days 则 disabled。
+    """
+    n = len(dates)
+    if n < min_total_days:
+        return {
+            "enabled": False,
+            "reason": f"样本 {n} 日低于 walk-forward 最低要求 {min_total_days}",
+            "train_dates": [],
+            "validate_dates": [],
+            "test_dates": [],
+        }
+
+    need = train_days + validate_days + test_days
+    if n >= need:
+        train_end = train_days
+        val_end = train_days + validate_days
+        return {
+            "enabled": True,
+            "mode": "fixed",
+            "train_dates": dates[:train_end],
+            "validate_dates": dates[train_end:val_end],
+            "test_dates": dates[val_end:val_end + test_days],
+        }
+
+    # 按比例切分
+    t_n = max(int(n * 0.6), 1)
+    v_n = max(int(n * 0.2), 1)
+    test_n = n - t_n - v_n
+    if test_n < 1:
+        test_n = 1
+        v_n = max(n - t_n - test_n, 1)
     return {
-        field: round(float(np.mean(values)), 4) if values else 0.0
-        for field, values in result.items()
+        "enabled": True,
+        "mode": "proportional",
+        "train_dates": dates[:t_n],
+        "validate_dates": dates[t_n : t_n + v_n],
+        "test_dates": dates[t_n + v_n :],
+    }
+
+
+def slice_panel_by_dates(panel: pd.DataFrame, dates: list[str]) -> pd.DataFrame:
+    """按 trade_date 子集截取面板"""
+    if not dates or panel.empty or "trade_date" not in panel.columns:
+        return panel.iloc[0:0].copy()
+    date_set = set(dates)
+    return panel[panel["trade_date"].astype(str).isin(date_set)].copy()
+
+
+def evaluate_score_on_panel(
+    panel: pd.DataFrame,
+    score_col: str,
+    return_col: str = "future_return_20",
+) -> dict[str, Any]:
+    """在指定面板上评估单一分数列的 IC 与五分位"""
+    daily_ic = compute_daily_ic_panel(panel, score_col, return_col=return_col)
+    ic_summary = summarize_ic(daily_ic)
+    quintile = compute_quintile_stats(panel, score_col, return_col=return_col)
+    return {
+        "ic": ic_summary,
+        "quintile": quintile,
+        "panel_rows": len(panel),
+        "trade_days": panel["trade_date"].nunique() if not panel.empty else 0,
     }
 
 
